@@ -1,75 +1,38 @@
-![image](https://github.com/michaeltroya/supa-next-starter/assets/38507347/2ea40874-98de-49ec-ab6a-74c816e6ca22)
-
-<h1 align="center">⚡ SupaNext Starter Kit ⚡</h1>
-
-<p align="center">
- The Last Next.js and Supabase Starter You Will Ever Need
-</p>
-
-<div align="center">
-
-<img alt="GitHub License" src="https://img.shields.io/github/license/michaeltroya/supa-next-starter">
-
-  <a href="https://twitter.com/intent/follow?screen_name=michaeltroya_">
-   <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/michaeltroya_">
-  </a>
-</div>
-
-<div align="center">
-  <sub>Created by <a href="https://twitter.com/michaeltroya_">Michael Troya</a>
-</div>
-
-<br/>
-
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#documentation"><strong>Documentation</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-</p>
-<br/>
-
-## Features
-
-- ⚡️ Next.js 14 (App Router)
-- 💚 Supabase w/ supabase-ssr - Works across the entire [Next.js](https://nextjs.org) stack (App Router, Pages Router, Client, Server, Middleware, It just works!)
-- ⚛️ React 18
-- ⛑ TypeScript
-- 📦 [pnpm](https://pnpm.io/) - Fast, disk space efficient package manager
-- 🎨 [Tailwind](https://tailwindcss.com/)
-- 🔌 [shadcn/ui](https://ui.shadcn.com/) - Beautifully designed components that you can copy and paste into your apps.
-- 🧪 Jest w/SWC + React Testing Library - Unit tests for all of your code.
-- 🎛️ [MSW](https://mswjs.io/)v2 - Intercept requests inside your tests (set up for testing only)
-- 🪝[TanStackQuery](https://tanstack.com/query/v5)v5 - The best way to fetch data on the client
-- 📏 ESLint — To find and fix problems in your code
-- 💖 Prettier — Code Formatter for consistent style
-- 🐶 Husky — For running scripts before committing
-- 🚫 lint-staged — Run ESLint and Prettier against staged Git files
-- 👷 Github Actions — Run Type Checks, Tests, and Linters on Pull Requests
-- 🗂 Path Mapping — Import components or images using the `@` prefix
-- ⚪⚫ Dark mode - Toggle theme modes with [next-themes](https://github.com/pacocoursey/next-themes)
-- ✨ Next Top Loader - Render a pleasent top loader on navigation with [nextjs-toploader](https://github.com/TheSGJ/nextjs-toploader)
-- 🔋 Lots Extras - Next Bundle Analyzer, Vercel Analytics, Vercel Geist Font
-
 ## Clone and run locally
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
-
-2. Create a Next.js app using the Supabase Starter template npx command
+1. Install pnpm
 
    ```bash
-   pnpm create next-app -e https://github.com/michaeltroya/supa-next-starter
-   # or
-   npx create-next-app -e https://github.com/michaeltroya/supa-next-starter
+   npm install -g pnpm
    ```
+   
+2. Clone this repository
 
+   ```bash
+   gh clone TimBuilding/sd-solutions
+   # or
+   git clone git@github.com:TimBuilding/sd-solutions.git
+   ```
+   
 3. Use `cd` to change into the app's directory
 
    ```bash
-   cd name-of-new-app
+   cd sd-solutions
+   ```
+   
+4. Install the dependencies
+
+   ```bash
+   pnpm install
+   ```
+   
+5. Run supabase locally
+
+   ```bash
+   npx supabase start
    ```
 
-4. Rename `.env.local.example` to `.env.local` and update the following:
+6. Rename `.env.local.example` to `.env.local` and update the following:
 
    ```
    NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
@@ -84,16 +47,9 @@
    pnpm run dev
    ```
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+   The server should now be running on [localhost:3000](http://localhost:3000/).
 
 > Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
-
-## Showcase
-
-Websites started using this template:
-
-- [mainspring.pro](https://www.mainspring.pro/)
-- [Add yours](https://github.com/michaeltroya/supa-next-starter/edit/main/README.md)
 
 # Documentation
 
@@ -126,14 +82,29 @@ import { Button } from '@/components/ui/Button'
 import avatar from '@/public/avatar.png'
 ```
 
-### Switch to Yarn/npm
+### Git Workflow (Graphite)
 
-This starter uses pnpm by default, but this choice is yours. If you'd like to switch to Yarn/npm, delete the `pnpm-lock.yaml` file, install the dependencies with Yarn/npm, change the CI workflow, and Husky Git hooks to use Yarn/npm commands.
+1. Get the latest changes from the remote repository
 
-## License
+   ```bash
+   gt sync
+   ```
+   
+2. Develop your feature or fix a bug
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more information.
+3. Save/commit your changes
 
-## Feedback and issues
+   ```bash
+   gt create -am "feat: add new feature"
+   ```
+> `-a` flag stages all changes and `-m` flag adds a commit message
 
-Please file feedback and issues [here](https://github.com/michaeltroya/supa-next-starter/issues).
+4. Push your changes to the remote repository and create a pull request
+
+   ```bash
+   gt submit
+   ```
+   
+5. Confirm the pull request on Graphite
+
+6. Rinse and repeat
