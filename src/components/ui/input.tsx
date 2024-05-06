@@ -5,7 +5,7 @@ import { cn } from '@/utils/tailwind'
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  icon: ReactNode
+  icon?: ReactNode
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
