@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { Input } from '@/components/ui/input'
+import { User } from 'lucide-react'
 
 const meta: Meta<typeof Input> = {
   title: 'Atoms/Input',
@@ -49,4 +50,19 @@ export const Default: Story = {
     type: 'text',
     placeholder: 'Name',
   },
+}
+
+export const InputWithIcon: Story = {
+  args: {
+    variant: 'default',
+    icon: <User />,
+  },
+}
+
+export const FullWidth: Story = {
+  render: (args) => (
+    <div className={'w-96'}>
+      <Input {...args} className={'w-full'} />
+    </div>
+  ),
 }
