@@ -26,12 +26,13 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
   },
 }
+
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     variant: 'default',
-    children: 'ButtonShadcn',
+    children: 'Button',
   },
 }
