@@ -5,7 +5,7 @@
    ```bash
    npm install -g pnpm
    ```
-   
+
 2. Clone this repository
 
    ```bash
@@ -13,19 +13,19 @@
    # or
    git clone git@github.com:TimBuilding/sd-solutions.git
    ```
-   
+
 3. Use `cd` to change into the app's directory
 
    ```bash
    cd sd-solutions
    ```
-   
+
 4. Install the dependencies
 
    ```bash
    pnpm install
    ```
-   
+
 5. Run supabase locally
 
    ```bash
@@ -41,7 +41,7 @@
 
    Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
 
-5. You can now run the Next.js local development server:
+7. You can now run the Next.js local development server:
 
    ```bash
    pnpm run dev
@@ -89,7 +89,7 @@ import avatar from '@/public/avatar.png'
    ```bash
    gt sync
    ```
-   
+
 2. Develop your feature or fix a bug
 
 3. Save/commit your changes
@@ -97,14 +97,15 @@ import avatar from '@/public/avatar.png'
    ```bash
    gt create -am "feat: add new feature"
    ```
-> `-a` flag stages all changes and `-m` flag adds a commit message
+
+   > `-a` flag stages all changes and `-m` flag adds a commit message
 
 4. Push your changes to the remote repository and create a pull request
 
    ```bash
    gt submit
    ```
-   
+
 5. Confirm the pull request on Graphite
 
 6. Rinse and repeat
