@@ -54,7 +54,6 @@ export const Default: Story = {
 
 export const InputWithIcon: Story = {
   args: {
-    variant: 'default',
     icon: <User />,
   },
 }
