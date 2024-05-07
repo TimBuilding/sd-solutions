@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { FC } from 'react'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Lock, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-const LoginForm = () => {
+const LoginForm: FC = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: { email: '', password: '' },
