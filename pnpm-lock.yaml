@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@designbycode/tailwindcss-text-shadow':
+        specifier: ^2.0.0
+        version: 2.0.0(tailwindcss@3.3.3)
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.3.4(react-hook-form@7.51.4(react@18.2.0))
@@ -987,6 +990,11 @@ packages:
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
+
+  '@designbycode/tailwindcss-text-shadow@2.0.0':
+    resolution: {integrity: sha512-Dm2NZYXMjeyd0NeptuuG5SejLsTNY4YKovmUMSrqkAzn1eehqxfAvS9UsDgHTuOeT/rklXd/Rwg3axB+AyGV6g==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >=3.0.0-alpha.1'
 
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
@@ -7862,6 +7870,10 @@ snapshots:
 
   '@colors/colors@1.5.0':
     optional: true
+
+  '@designbycode/tailwindcss-text-shadow@2.0.0(tailwindcss@3.3.3)':
+    dependencies:
+      tailwindcss: 3.3.3
 
   '@discoveryjs/json-ext@0.5.7': {}
 

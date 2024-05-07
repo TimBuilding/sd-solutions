@@ -29,6 +29,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@designbycode/tailwindcss-text-shadow": "^2.0.0",
     "@hookform/resolvers": "^3.3.4",
     "@next/bundle-analyzer": "^14.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
