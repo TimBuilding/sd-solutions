@@ -3,7 +3,7 @@ import LoginForm from '@/app/(auth)/login/login-form'
 import SDSolutionsLogo from '@/components/SDSolutionsLogo'
 import SDSolutionsLogoMinimal from '@/components/SDSolutionsLogo-Minimal'
 
-const LoginPage = () => {
+const LoginPage = ({ searchParams }: { searchParams: { error: string } }) => {
   return (
     <div className={'relative flex min-h-screen w-full flex-row'}>
       {/* md: show */}
@@ -37,9 +37,20 @@ const LoginPage = () => {
         }
       >
         <h1 className={'sr-only'}>Login</h1>
-        <span className={'max-w-xs'}>
+        <span className={'max-w-xs md:max-w-sm'}>
           <SDSolutionsLogo />
         </span>
+        {searchParams.error === 'login-failed' && (
+          <div
+            className={
+              'max-w-xs border-l-4 border-red-500 bg-red-100 p-4 text-red-700 lg:max-w-sm'
+            }
+            role={'alert'}
+          >
+            <p className={'font-bold'}>Login failed</p>
+            <p>Check your email and password and try again.</p>
+          </div>
+        )}
         <LoginForm />
       </div>
     </div>
