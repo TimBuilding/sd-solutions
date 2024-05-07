@@ -1,10 +1,11 @@
 import React from 'react'
 import LoginForm from '@/app/(auth)/login/login-form'
 import SDSolutionsLogo from '@/components/SDSolutionsLogo'
+import SDSolutionsLogoMinimal from '@/components/SDSolutionsLogo-Minimal'
 
 const LoginPage = () => {
   return (
-    <div className={'flex min-h-screen w-full flex-row'}>
+    <div className={'relative flex min-h-screen w-full flex-row'}>
       {/* md: show */}
       <div
         className={
@@ -18,6 +19,17 @@ const LoginPage = () => {
         >
           Join the SDSolutions community.
         </h2>
+      </div>
+
+      {/* md: center logo */}
+      <div
+        className={
+          'absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 rounded-full border-8 border-background bg-secondary p-8 lg:block'
+        }
+      >
+        <span className={'block h-12 w-12'}>
+          <SDSolutionsLogoMinimal />
+        </span>
       </div>
       <div
         className={
