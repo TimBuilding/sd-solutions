@@ -22,9 +22,6 @@ const meta: Meta<typeof Button> = {
       options: ['default', 'icon', 'sm', 'lg'],
     },
   },
-  parameters: {
-    layout: 'centered',
-  },
 }
 
 export default meta

@@ -4,7 +4,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 const PublishInput = () => {
   return (
-    <div className={'flex flex-row gap-5 pb-10'}>
+    <div className={'flex flex-row gap-5 px-4 pb-10'}>
       <Image
         src={'https://picsum.photos/200/300'}
         alt={''}
