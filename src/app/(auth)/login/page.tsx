@@ -1,16 +1,17 @@
 import React from 'react'
 import LoginForm from '@/app/(auth)/login/login-form'
-import LogoFull from '@/assets/images/Logo Full.png'
-import Image from 'next/image'
+import SDSolutionsLogo from '@/components/SDSolutionsLogo'
 
 const LoginPage = () => {
   return (
     <div
       className={
-        'gap-5g flex min-h-screen w-full flex-col items-center justify-center'
+        'flex min-h-screen w-full flex-col items-center justify-center gap-5'
       }
     >
-      <Image src={LogoFull} alt={'SD Solutions'} width={320} />
+      <span className={'max-w-xs'}>
+        <SDSolutionsLogo />
+      </span>
       <LoginForm />
     </div>
   )
