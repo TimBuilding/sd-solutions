@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '@/app/(home)/layout'
 import Publish from '@/components/Publish/publish'
 import Post from '@/components/Post/Post'
 
