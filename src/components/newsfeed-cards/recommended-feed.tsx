@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 
 const Feed = () => {
   return (
-    <div className={'flex flex-row gap-8 py-4'}>
+    <div className={'flex flex-row justify-between gap-8 py-4'}>
       <div className={'flex flex-row items-center justify-center'}>
         <span
           className={
@@ -33,9 +33,9 @@ const Feed = () => {
 
 const RecommendedFeed = () => {
   return (
-    <Card className={'w-full max-w-xs'}>
+    <Card className={'h-fit w-full max-w-xs'}>
       <CardHeader className={'text-sm text-card-foreground/40'}>
-        Recommended Pages
+        Recommended Feeds
       </CardHeader>
       <Separator />
       <CardContent>

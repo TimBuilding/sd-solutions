@@ -7,7 +7,7 @@ import PostStatus from '@/components/Post/post-status'
 
 const Post = () => {
   return (
-    <Card className={'w-full md:max-w-2xl'}>
+    <Card className={'w-full md:max-w-3xl'}>
       <PostUserProfile />
       <PostContent />
       <PostInteractions />

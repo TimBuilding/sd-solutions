@@ -11,7 +11,7 @@ const LatestAnnouncement = () => {
   return (
     <Card
       className={
-        'w-full max-w-xs bg-primary/70 px-6 pb-9 pt-6 text-primary-foreground'
+        'h-fit w-full max-w-xs bg-primary/70 px-6 pb-9 pt-6 text-primary-foreground'
       }
     >
       <Megaphone className={'h-6 w-6'} />
