@@ -31,6 +31,7 @@ const getNewsfeed = async (supabase: SupabaseClient) => {
     .from('newsfeed')
     .select('*')
     .in('user_id', connectedUsers)
+    .order('created_at', { ascending: false })
 
   if (error) {
     throw error
