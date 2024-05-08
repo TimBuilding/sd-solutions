@@ -11,9 +11,10 @@ import {
 
 interface Props {
   setIsOpen: (_isOpen: boolean) => void
+  isPending: boolean
 }
 
-const PublishInput: FC<Props> = ({ setIsOpen }) => {
+const PublishInput: FC<Props> = ({ setIsOpen, isPending }) => {
   const { control } = useFormContext()
 
   return (
@@ -33,6 +34,7 @@ const PublishInput: FC<Props> = ({ setIsOpen }) => {
                 className={
                   'h-16 w-full min-w-[380px] resize-none border-none bg-card placeholder:text-muted-foreground/30 focus-visible:ring-0'
                 }
+                disabled={isPending}
                 placeholder={'Write something awesome...'}
                 {...field}
               />

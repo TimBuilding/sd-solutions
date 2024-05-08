@@ -6,7 +6,7 @@ import Activity from '@/components/Publish/activity'
 import { Separator } from '@/components/ui/separator'
 import Settings from '@/components/Publish/settings'
 import { Button } from '@/components/ui/button'
-import { X } from 'lucide-react'
+import { Loader2, X } from 'lucide-react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import PublishSchema from '@/components/Publish/publish-schema'
@@ -26,7 +26,7 @@ const Publish = () => {
     },
   })
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: publishNewPost,
     mutationKey: ['newsfeed'],
     onSuccess: () => {
@@ -69,7 +69,7 @@ const Publish = () => {
               <X className={'h-4 w-4'} />
             </Button>
           )}
-          <PublishInput setIsOpen={setIsOpen} />
+          <PublishInput setIsOpen={setIsOpen} isPending={isPending} />
           <Separator />
           <Activity />
           {isOpen && (
@@ -78,8 +78,16 @@ const Publish = () => {
               <Settings />
               <Separator />
               <div className={'p-2'}>
-                <Button type={'submit'} className={'w-full'}>
-                  Publish
+                <Button
+                  type={'submit'}
+                  className={'w-full'}
+                  disabled={isPending}
+                >
+                  {isPending ? (
+                    <Loader2 className={'animate-spin'} />
+                  ) : (
+                    'Publish'
+                  )}
                 </Button>
               </div>
             </>
