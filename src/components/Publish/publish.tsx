@@ -81,7 +81,7 @@ const Publish = () => {
                 <Button
                   type={'submit'}
                   className={'w-full'}
-                  disabled={isPending}
+                  disabled={isPending || !form.formState.isValid}
                 >
                   {isPending ? (
                     <Loader2 className={'animate-spin'} />
