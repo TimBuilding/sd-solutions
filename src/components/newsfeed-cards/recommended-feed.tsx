@@ -33,7 +33,7 @@ const Feed = () => {
 
 const RecommendedFeed = () => {
   return (
-    <Card>
+    <Card className={'w-full max-w-xs'}>
       <CardHeader className={'text-sm text-card-foreground/40'}>
         Recommended Pages
       </CardHeader>
