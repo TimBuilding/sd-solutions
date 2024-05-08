@@ -10,7 +10,7 @@ import MobileDropdown from '@/components/layout/mobile-dropdown'
 
 const Navbar = () => {
   return (
-    <div className="sticky top-0 z-10 flex w-full flex-row justify-between">
+    <div className="sticky top-0 z-10 flex w-full flex-row justify-between justify-between bg-white px-3 py-2 drop-shadow-md">
       <div className="flex flex-row items-center justify-start gap-2.5">
         <SDSolutionsLogoMinimal
           className="h-6 w-6 bg-transparent fill-black"
