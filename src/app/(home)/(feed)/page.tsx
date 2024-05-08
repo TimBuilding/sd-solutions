@@ -5,7 +5,7 @@ import Post from '@/components/Post/Post'
 
 const Page = () => {
   return (
-    <div className={'flex flex-col gap-7'}>
+    <div className={'flex flex-col items-center gap-7'}>
       <Publish />
       <Post />
       <Post />
