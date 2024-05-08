@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import SDSolutionsLogoMinimal from '@/components/SDSolutionsLogo-Minimal'
 import MobileDropdown from '@/components/layout/mobile-dropdown'
+import DesktopDropdown from '@/components/layout/desktop-dropdown'
 
 const Navbar = () => {
   return (
@@ -35,10 +36,11 @@ const Navbar = () => {
           placeholder="Search"
           className="hidden w-80 rounded-full border border-none bg-[#F7F7F7] placeholder:text-zinc-300 focus:bg-white lg:block"
         />
-        <Button
-          variant="ghost"
-          className="hidden h-9 w-9 rounded-full bg-primary lg:block"
-        />
+        <DesktopDropdown />
+        {/*<Button*/}
+        {/*  variant="ghost"*/}
+        {/*  className="hidden h-9 w-9 rounded-full bg-primary lg:block"*/}
+        {/*/>*/}
       </div>
       <MobileDropdown />
     </div>
