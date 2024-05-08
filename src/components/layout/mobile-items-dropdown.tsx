@@ -1,6 +1,5 @@
 import React, { ComponentType, FC } from 'react'
 import { Button } from '@/components/ui/button'
-import { Activity } from 'lucide-react'
 
 interface IconProps {
   className?: string

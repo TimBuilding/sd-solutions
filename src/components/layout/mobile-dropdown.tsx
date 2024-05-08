@@ -3,7 +3,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Megaphone, Menu, Calendar, LogOut } from 'lucide-react'
+import { Megaphone, Calendar, LogOut } from 'lucide-react'
 import { Activity } from 'lucide-react'
 import MobileItemsDropdown, {
   MobileProps,
@@ -42,7 +42,23 @@ const MobileDropdown = () => {
         className="hover:bg-transparent"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <Menu className="h-4 w-4 text-[#999999]" />
+        <div className="flex flex-col items-center justify-center">
+          <span
+            className={`my-0.5 block h-0.5 w-4 rounded-sm bg-[#999999] transition-all duration-300 ease-out ${
+              isOpen ? 'translate-y-1 rotate-45' : '-translate-y-0.5'
+            }`}
+          ></span>
+          <span
+            className={`block h-0.5 w-4 rounded-sm bg-[#999999] transition-all duration-300 ease-out  ${
+              isOpen ? 'opacity-0' : 'opacity-100'
+            }`}
+          ></span>
+          <span
+            className={`my-0.5 block h-0.5 w-4 rounded-sm bg-[#999999] transition-all duration-300 ease-out ${
+              isOpen ? '-translate-y-1 -rotate-45' : 'translate-y-0.5'
+            }`}
+          ></span>
+        </div>
       </Button>
       {isOpen && (
         <div className="absolute left-0 right-0 z-0 mt-2 flex w-full flex-col gap-2 bg-white px-4 py-2 drop-shadow-md ">
