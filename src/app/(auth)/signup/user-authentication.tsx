@@ -1,9 +1,9 @@
 import React from 'react'
-import { Card } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Card } from '@/components/ui/card'
 
-const UserDetails = () => {
+const UserAuthentication = () => {
   return (
     <Card className={'mx-auto flex w-full max-w-xs flex-col gap-5 p-10'}>
       <div className={'relative'}>
@@ -12,10 +12,11 @@ const UserDetails = () => {
             'absolute left-3 top-3 z-10 text-xs font-medium uppercase tracking-tighter text-card-foreground/50'
           }
         >
-          First Name
+          Password
         </Label>
         <Input
-          placeholder={'Enter your first name'}
+          type={'password'}
+          placeholder={'Choose a password'}
           className={'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'}
         />
       </div>
@@ -25,23 +26,11 @@ const UserDetails = () => {
             'absolute left-3 top-3 z-10 text-xs font-medium uppercase tracking-tighter text-card-foreground/50'
           }
         >
-          Last Name
+          Repeat Password
         </Label>
         <Input
-          placeholder={'Enter your last name'}
-          className={'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'}
-        />
-      </div>
-      <div className={'relative'}>
-        <Label
-          className={
-            'absolute left-3 top-3 z-10 text-xs font-medium uppercase tracking-tighter text-card-foreground/50'
-          }
-        >
-          Email
-        </Label>
-        <Input
-          placeholder={'Enter your email address'}
+          type={'password'}
+          placeholder={'Repeat your password'}
           className={'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'}
         />
       </div>
@@ -49,4 +38,4 @@ const UserDetails = () => {
   )
 }
 
-export default UserDetails
+export default UserAuthentication
