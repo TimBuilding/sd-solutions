@@ -8,6 +8,8 @@ const Page = () => {
     <div className={'flex flex-col gap-7'}>
       <Publish />
       <Post />
+      <Post />
+      <Post />
     </div>
   )
 }
