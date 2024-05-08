@@ -1,6 +1,6 @@
 create table newsfeed (
   id uuid primary key default uuid_generate_v4(),
-  user_id uuid references auth.users(id) on delete cascade not null,
+  user_id uuid references user_profiles on delete cascade not null,
   content text not null,
   created_at timestamp with time zone default now()
 );

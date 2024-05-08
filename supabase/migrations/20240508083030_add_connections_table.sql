@@ -1,7 +1,7 @@
 create table connections (
   id uuid primary key default uuid_generate_v4(),
-  user_id uuid references auth.users(id) on delete cascade not null,
-  connection_user_id uuid references auth.users(id) on delete cascade not null,
+  user_id uuid references user_profiles on delete cascade not null,
+  connection_user_id uuid references user_profiles on delete cascade not null,
   created_at timestamp with time zone default now()
 );
 
