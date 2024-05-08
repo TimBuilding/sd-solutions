@@ -6,7 +6,7 @@ import { z } from 'zod'
 import LoginSchema from '@/app/(auth)/login/login-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/input'
-import { Lock, User } from 'lucide-react'
+import { Loader2, Lock, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import loginAction from '@/app/(auth)/login/login-action'
 
@@ -34,9 +34,10 @@ const LoginForm: FC = () => {
             <FormItem>
               <FormControl>
                 <Input
-                  {...field}
                   icon={<User />}
                   placeholder={'email@sdsolutions.com'}
+                  disabled={isPending}
+                  {...field}
                 />
               </FormControl>
             </FormItem>
@@ -49,17 +50,18 @@ const LoginForm: FC = () => {
             <FormItem>
               <FormControl>
                 <Input
-                  {...field}
                   icon={<Lock />}
                   type={'password'}
                   placeholder={'mysecretpassword'}
+                  disabled={isPending}
+                  {...field}
                 />
               </FormControl>
             </FormItem>
           )}
         />
-        <Button type={'submit'} className={'w-full'}>
-          Login
+        <Button type={'submit'} className={'w-full'} disabled={isPending}>
+          {isPending ? <Loader2 className={'animate-spin'} /> : 'Login'}
         </Button>
       </form>
     </Form>
