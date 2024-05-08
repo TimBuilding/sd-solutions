@@ -6,16 +6,24 @@ import PostInteractions from '@/components/Post/post-interactions'
 import PostStatus from '@/components/Post/post-status'
 import { Tables } from '@/types/database.types'
 
+type ExtendedPost = Tables<'newsfeed'> & {
+  user_profiles: {
+    first_name: string
+    last_name: string
+    email: string
+  }
+}
+
 const usePostContext = () => {
   return useContext(PostContext)
 }
 
 const PostContext = createContext({
-  post: {} as Tables<'newsfeed'>,
+  post: {} as ExtendedPost,
 })
 
 interface Props {
-  post: Tables<'newsfeed'>
+  post: ExtendedPost
 }
 
 const Post: FC<Props> = ({ post }) => {

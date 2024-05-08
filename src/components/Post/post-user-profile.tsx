@@ -14,8 +14,8 @@ const PostUserProfile = () => {
     <div className={'flex flex-row gap-2.5 px-4 pt-4'}>
       <Avatar className={'h-11 w-11 rounded-full'} {...config} />
       <div className={'flex flex-col items-start justify-center'}>
-        <h3 className={'text-sm font-medium text-card-foreground'}>
-          {post.user_id}
+        <h3 className={'text-sm font-medium capitalize text-card-foreground'}>
+          {post.user_profiles.first_name} {post.user_profiles.last_name}
         </h3>
         <span className={'text-xs text-muted-foreground/50'}>
           {post.created_at &&
