@@ -7,8 +7,9 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   return (
-    <div className="flex w-full flex-col items-center justify-between bg-white px-4 py-2 drop-shadow-md ">
+    <div className={'flex w-full flex-col'}>
       <Navbar />
+      <main className={'mx-auto w-full max-w-7xl px-2.5 py-5'}>{children}</main>
     </div>
   )
 }
