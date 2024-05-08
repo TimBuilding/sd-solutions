@@ -12,15 +12,13 @@ import { z } from 'zod'
 import PublishSchema from '@/components/Publish/publish-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
-import { createBrowserClient } from '@/utils/supabase'
-import { TablesInsert } from '@/types/database.types'
 import { useToast } from '@/components/ui/use-toast'
-import { useRouter } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
+import publishNewPost from '@/components/Publish/publish-new-post'
 
 const Publish = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { toast } = useToast()
-  const router = useRouter()
   const form = useForm<z.infer<typeof PublishSchema>>({
     resolver: zodResolver(PublishSchema),
     defaultValues: {
@@ -28,46 +26,30 @@ const Publish = () => {
     },
   })
 
-  const publishHandler: SubmitHandler<z.infer<typeof PublishSchema>> = async ({
-    content,
-  }) => {
-    const supabase = createBrowserClient()
-
-    // get user id
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    if (!user) {
+  const { mutateAsync } = useMutation({
+    mutationFn: publishNewPost,
+    mutationKey: ['newsfeed'],
+    onSuccess: () => {
+      form.reset()
       toast({
-        variant: 'destructive',
-        title: 'User not found',
-        description: 'Please login to publish',
+        variant: 'default',
+        title: 'Published',
+        description: 'Your content has been published',
       })
-      return router.push('/login')
-    }
-
-    // create insert object
-    const values: TablesInsert<'newsfeed'> = {
-      content: content,
-      user_id: user.id,
-    }
-
-    // insert into database
-    const { error } = await supabase.from('newsfeed').insert(values)
-    if (error) {
-      return toast({
+    },
+    onError: (error) => {
+      toast({
         variant: 'destructive',
         title: 'Something went wrong.',
         description: error.message,
       })
-    }
+    },
+  })
 
-    // show success message
-    toast({
-      variant: 'default',
-      title: 'Published',
-      description: 'Your content has been published',
-    })
+  const publishHandler: SubmitHandler<z.infer<typeof PublishSchema>> = async (
+    data,
+  ) => {
+    await mutateAsync(data)
   }
 
   return (
