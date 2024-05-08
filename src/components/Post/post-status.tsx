@@ -1,37 +1,33 @@
+'use client'
 import React from 'react'
 import { Heart, Link2, MessageCircle } from 'lucide-react'
-import Image from 'next/image'
+import Avatar, { genConfig } from 'react-nice-avatar'
 
 const PostStatus = () => {
+  const config1 = genConfig('email1@gmail.com')
+  const config2 = genConfig('email2@gmail.com')
+  const config3 = genConfig('email3@gmail.com')
+
   return (
     <div
       className={'flex flex-row items-center justify-between px-4 pb-4 pt-2.5'}
     >
       <div className={'flex flex-row items-center justify-center'}>
-        <Image
-          src={'https://picsum.photos/200/300'}
-          alt={''}
-          className={'z-0 h-10 w-10 rounded-full border-4 border-card'}
-          width={36}
-          height={36}
+        <Avatar
+          className={'z-0 h-9 w-9 rounded-full border-4 border-card'}
+          {...config1}
         />
-        <Image
-          src={'https://picsum.photos/200/300'}
-          alt={''}
+        <Avatar
           className={
-            'z-10 h-10 w-10 -translate-x-3 rounded-full border-4 border-card'
+            'z-10 h-9 w-9 -translate-x-3 rounded-full border-4 border-card'
           }
-          width={36}
-          height={36}
+          {...config2}
         />
-        <Image
-          src={'https://picsum.photos/200/300'}
-          alt={''}
+        <Avatar
           className={
-            'z-20 h-10 w-10 -translate-x-6 rounded-full border-4 border-card'
+            'z-20 h-9 w-9 -translate-x-6 rounded-full border-4 border-card'
           }
-          width={36}
-          height={36}
+          {...config3}
         />
       </div>
       <div className={'flex flex-row items-center justify-center gap-3'}>
