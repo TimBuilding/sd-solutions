@@ -24,6 +24,9 @@ const getNewsfeed = async (supabase: SupabaseClient) => {
     (connection) => connection.connection_user_id,
   )
 
+  // add current user to connectedUsers array to get their own posts
+  connectedUsers.push(user.id)
+
   const { data, error } = await supabase
     .from('newsfeed')
     .select('*')
