@@ -26,7 +26,7 @@ interface Props {
 
 const Stepper: FC<Props> = ({ activeStep }) => {
   return (
-    <div className={'flex w-96 flex-row items-center justify-between'}>
+    <div className={'flex w-full flex-row items-center justify-between'}>
       {steps.map(({ step, icon }) => (
         <StepperItem
           key={step}

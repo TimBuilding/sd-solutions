@@ -33,7 +33,7 @@ const StepperItem: FC<Props> = ({ step, activeStep, icon: Icon }) => {
         className={cn(
           step === 0 && 'hidden',
           isActive ? 'bg-primary' : 'bg-muted-foreground/40',
-          ' absolute right-0 top-4 z-0 h-2 w-52',
+          ' absolute right-0 top-4 z-0 h-2 w-40 md:w-64',
         )}
       />
     </div>

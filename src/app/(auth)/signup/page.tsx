@@ -1,10 +1,11 @@
 import React from 'react'
-import SignUpStepper from '@/app/(auth)/signup/sign-up-stepper'
+import SignUpForm from '@/app/(auth)/signup/sign-up-form'
 
 const SignUpPage = () => {
   return (
     <>
-      <SignUpStepper />
+      <h1 className={'sr-only'}>Sign Up</h1>
+      <SignUpForm />
     </>
   )
 }

@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card'
 
 const UserAuthentication = () => {
   return (
-    <Card className={'mx-auto flex w-full max-w-xs flex-col gap-5 p-10'}>
+    <Card className={'mx-auto flex w-full flex-col gap-5 p-10'}>
       <div className={'relative'}>
         <Label
           className={
