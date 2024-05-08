@@ -24,10 +24,10 @@ const Publish = () => {
         </Button>
       )}
       <PublishInput setIsOpen={setIsOpen} />
+      <Separator />
+      <Activity />
       {isOpen && (
         <>
-          <Separator />
-          <Activity />
           <Separator />
           <Settings />
           <Separator />
