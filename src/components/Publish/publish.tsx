@@ -13,12 +13,13 @@ import PublishSchema from '@/components/Publish/publish-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
 import { useToast } from '@/components/ui/use-toast'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import publishNewPost from '@/components/Publish/publish-new-post'
 
 const Publish = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { toast } = useToast()
+  const queryClient = useQueryClient()
   const form = useForm<z.infer<typeof PublishSchema>>({
     resolver: zodResolver(PublishSchema),
     defaultValues: {
@@ -30,12 +31,20 @@ const Publish = () => {
     mutationFn: publishNewPost,
     mutationKey: ['newsfeed'],
     onSuccess: () => {
-      form.reset()
-      toast({
-        variant: 'default',
-        title: 'Published',
-        description: 'Your content has been published',
-      })
+      // revalidate
+      queryClient
+        .invalidateQueries({
+          queryKey: ['newsfeed'],
+        })
+        .then(() => {
+          form.reset()
+          toast({
+            variant: 'default',
+            title: 'Published',
+            description: 'Your content has been published',
+          })
+          setIsOpen(false)
+        })
     },
     onError: (error) => {
       toast({
