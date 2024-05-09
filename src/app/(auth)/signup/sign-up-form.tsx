@@ -1,10 +1,28 @@
 'use client'
-import React, { ReactNode, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useState } from 'react'
 import Stepper from '@/components/stepper/stepper'
 import UserDetails from '@/app/(auth)/signup/user-details'
 import UserAuthentication from '@/app/(auth)/signup/user-authentication'
 import Success from '@/app/(auth)/signup/success'
 import { Button } from '@/components/ui/button'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import SignupSchema from '@/app/(auth)/signup/signup-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form } from '@/components/ui/form'
+
+const useSignUpContext = () => {
+  const context = useContext(SignUpContext)
+  if (context === undefined) {
+    throw new Error('useSignUpContext must be used within a SignUpProvider')
+  }
+  return context
+}
+
+const SignUpContext = createContext({
+  activeStep: 0,
+  setActiveStep: (step: number) => {},
+})
 
 const steps: {
   label: string
@@ -26,38 +44,47 @@ const steps: {
 
 const SignUpForm = () => {
   const [activeStep, setActiveStep] = useState(0)
+  const form = useForm<z.infer<typeof SignupSchema>>({
+    resolver: zodResolver(SignupSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  })
+
+  const handleSignUp: SubmitHandler<
+    z.infer<typeof SignupSchema>
+  > = async () => {}
 
   return (
-    <div className={'mx-auto w-full max-w-xs pt-7 md:max-w-lg'}>
-      <Stepper activeStep={activeStep} />
-      <div className={'mt-64'}>
-        <div className={'flex flex-col items-center justify-center gap-5'}>
-          <h2 className={'text-xl text-foreground'}>
-            {steps[activeStep].label}
-          </h2>
-          {steps[activeStep].step}
-          <div
-            className={'flex w-full flex-row items-center justify-end gap-2'}
-          >
-            <Button
-              variant={'outline'}
-              disabled={activeStep === 0}
-              onClick={() => setActiveStep(activeStep - 1)}
-            >
-              Back
-            </Button>
-            <Button
-              variant={'default'}
-              disabled={activeStep === steps.length - 1}
-              onClick={() => setActiveStep(activeStep + 1)}
-            >
-              Next
-            </Button>
+    <Form {...form}>
+      <SignUpContext.Provider
+        value={{
+          setActiveStep,
+          activeStep,
+        }}
+      >
+        <form
+          onSubmit={form.handleSubmit(handleSignUp)}
+          className={'mx-auto w-full max-w-xs pt-7 md:max-w-lg'}
+        >
+          <Stepper activeStep={activeStep} />
+          <div className={'mt-64'}>
+            <div className={'flex flex-col items-center justify-center gap-5'}>
+              <h2 className={'text-xl text-foreground'}>
+                {steps[activeStep].label}
+              </h2>
+              {steps[activeStep].step}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </form>
+      </SignUpContext.Provider>
+    </Form>
   )
 }
 
 export default SignUpForm
+export { useSignUpContext }
