@@ -1,5 +1,4 @@
 import React from 'react'
-import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -11,9 +10,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { Loader2 } from 'lucide-react'
 
 const UserAuthentication = () => {
-  const { activeStep, setActiveStep } = useSignUpContext()
+  const { activeStep, setActiveStep, isLoading } = useSignUpContext()
 
   return (
     <>
@@ -33,6 +33,7 @@ const UserAuthentication = () => {
                 <Input
                   type={'password'}
                   placeholder={'Choose a password'}
+                  disabled={isLoading}
                   className={
                     'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
                   }
@@ -58,6 +59,7 @@ const UserAuthentication = () => {
                 <Input
                   type={'password'}
                   placeholder={'Repeat your password'}
+                  disabled={isLoading}
                   className={
                     'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
                   }
@@ -77,8 +79,8 @@ const UserAuthentication = () => {
         >
           Back
         </Button>
-        <Button type={'submit'} variant={'default'}>
-          Submit
+        <Button type={'submit'} variant={'default'} disabled={isLoading}>
+          {isLoading ? <Loader2 className={'animate-spin'} /> : 'Submit'}
         </Button>
       </div>
     </>

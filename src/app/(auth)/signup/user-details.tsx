@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form'
 
 const UserDetails = () => {
-  const { activeStep, setActiveStep } = useSignUpContext()
+  const { activeStep, setActiveStep, isLoading } = useSignUpContext()
   const form = useFormContext()
 
   const isNextDisabled = () => {
@@ -41,6 +41,7 @@ const UserDetails = () => {
               <FormControl>
                 <Input
                   placeholder={'Enter your first name'}
+                  disabled={isLoading}
                   className={
                     'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
                   }
@@ -65,6 +66,7 @@ const UserDetails = () => {
               <FormControl>
                 <Input
                   placeholder={'Enter your last name'}
+                  disabled={isLoading}
                   className={
                     'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
                   }
@@ -89,6 +91,7 @@ const UserDetails = () => {
               <FormControl>
                 <Input
                   placeholder={'Enter your email address'}
+                  disabled={isLoading}
                   className={
                     'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
                   }

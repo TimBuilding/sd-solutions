@@ -22,7 +22,8 @@ const useSignUpContext = () => {
 
 const SignUpContext = createContext({
   activeStep: 0,
-  setActiveStep: (step: number) => {},
+  setActiveStep: (_step: number) => {},
+  isLoading: false,
 })
 
 const steps: {
@@ -45,6 +46,7 @@ const steps: {
 
 const SignUpForm = () => {
   const [activeStep, setActiveStep] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
     defaultValues: {
@@ -60,6 +62,7 @@ const SignUpForm = () => {
   const handleSignUp: SubmitHandler<z.infer<typeof SignupSchema>> = async (
     data,
   ) => {
+    setIsLoading(true)
     const supabase = createBrowserClient()
 
     const { error } = await supabase.auth.signUp({
@@ -79,9 +82,12 @@ const SignUpForm = () => {
         description: error.message,
         variant: 'destructive',
       })
+      setIsLoading(false)
+      return
     }
 
     setActiveStep(2)
+    setIsLoading(false)
   }
 
   return (
@@ -90,6 +96,7 @@ const SignUpForm = () => {
         value={{
           setActiveStep,
           activeStep,
+          isLoading,
         }}
       >
         <form
