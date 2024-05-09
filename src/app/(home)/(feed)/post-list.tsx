@@ -5,6 +5,7 @@ import { Tables } from '@/types/database.types'
 import { createBrowserClient } from '@/utils/supabase'
 import { useQuery } from '@tanstack/react-query'
 import getNewsfeed from '@/queries/get-newsfeed'
+import LoadingPost from '@/app/(home)/(feed)/loading-post'
 
 interface Props {
   initialData: Tables<'newsfeed'>[]
@@ -13,13 +14,18 @@ interface Props {
 const PostList: FC<Props> = ({ initialData }) => {
   const supabase = createBrowserClient()
 
-  const { data } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['newsfeed'],
     queryFn: () => getNewsfeed(supabase),
     initialData,
   })
 
-  return <>{data?.map((post) => <Post key={post.id} post={post} />)}</>
+  return (
+    <>
+      {isPending && [1, 2, 3].map((key) => <LoadingPost key={key} />)}
+      {data && data.map((post) => <Post key={post.id} post={post} />)}
+    </>
+  )
 }
 
 export default PostList
