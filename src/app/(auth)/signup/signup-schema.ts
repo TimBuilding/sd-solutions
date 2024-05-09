@@ -13,6 +13,7 @@ const SignupSchema = z
       ctx.addIssue({
         code: 'custom',
         message: 'The passwords did not match',
+        path: ['confirmPassword'],
       })
     }
   })

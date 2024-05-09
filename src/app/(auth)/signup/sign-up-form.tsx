@@ -4,12 +4,13 @@ import Stepper from '@/components/stepper/stepper'
 import UserDetails from '@/app/(auth)/signup/user-details'
 import UserAuthentication from '@/app/(auth)/signup/user-authentication'
 import Success from '@/app/(auth)/signup/success'
-import { Button } from '@/components/ui/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import SignupSchema from '@/app/(auth)/signup/signup-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
+import { createBrowserClient } from '@/utils/supabase'
+import { useToast } from '@/components/ui/use-toast'
 
 const useSignUpContext = () => {
   const context = useContext(SignUpContext)
@@ -54,10 +55,34 @@ const SignUpForm = () => {
       confirmPassword: '',
     },
   })
+  const { toast } = useToast()
 
-  const handleSignUp: SubmitHandler<
-    z.infer<typeof SignupSchema>
-  > = async () => {}
+  const handleSignUp: SubmitHandler<z.infer<typeof SignupSchema>> = async (
+    data,
+  ) => {
+    const supabase = createBrowserClient()
+
+    const { error } = await supabase.auth.signUp({
+      email: data.email,
+      password: data.password,
+      options: {
+        data: {
+          first_name: data.firstName,
+          last_name: data.lastName,
+        },
+      },
+    })
+
+    if (error) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      })
+    }
+
+    setActiveStep(2)
+  }
 
   return (
     <Form {...form}>

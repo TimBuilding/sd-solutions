@@ -16,7 +16,9 @@ create policy "Allow users to view profile"
 create or replace function public.create_user_profile()
   returns trigger as $$
   begin
-    insert into public.user_profiles (user_id) values (new.id);
+    insert into public.user_profiles (user_id, first_name, last_name, email)
+    values (new.id, new.raw_user_meta_data ->> 'first_name', new.raw_user_meta_data ->> 'last_name', new.email);
+
     return new;
   end;
   $$ language plpgsql security definer;
