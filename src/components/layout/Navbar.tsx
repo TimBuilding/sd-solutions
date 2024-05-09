@@ -9,7 +9,7 @@ import DesktopDropdown from '@/components/layout/desktop-dropdown'
 import SearchBox from '@/components/search/search-box'
 
 const Navbar = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(true)
 
   return (
     <div className="sticky top-0 z-10 flex w-full flex-row  justify-between bg-white px-3 py-2 drop-shadow-md">
@@ -41,6 +41,7 @@ const Navbar = () => {
           </div>
           <div className="flex flex-row justify-end gap-2.5">
             <Input
+              onClick={() => setIsSearchOpen(true)}
               icon={
                 <Search className="hidden h-4 w-4 text-[#999999] lg:block" />
               }
