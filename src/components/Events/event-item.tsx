@@ -18,7 +18,7 @@ const EventItem: FC<Props> = ({ title, date, content }) => {
     <div
       className={'flex w-full flex-col bg-card px-8 py-10 text-card-foreground'}
     >
-      <h2 className={'w-72 text-2xl font-extrabold'}>{title}</h2>
+      <h2 className={'w-72 text-2xl font-extrabold md:text-3xl'}>{title}</h2>
       <span className={'mt-10 leading-6 text-card-foreground/40'}>
         {format(new Date(date), 'MMMM d, yyyy')}
       </span>
