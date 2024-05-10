@@ -37,19 +37,19 @@ export type Database = {
       connections: {
         Row: {
           connection_user_id: string
-          created_at: string | null
+          created_at: string
           id: string
           user_id: string
         }
         Insert: {
           connection_user_id: string
-          created_at?: string | null
+          created_at?: string
           id?: string
           user_id: string
         }
         Update: {
           connection_user_id?: string
-          created_at?: string | null
+          created_at?: string
           id?: string
           user_id?: string
         }

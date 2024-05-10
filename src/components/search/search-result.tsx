@@ -10,6 +10,7 @@ interface Props {
 const SearchResult: FC<Props> = ({ profile }) => {
   const config = genConfig(profile.email || 'email')
 
+  const handleConnect = () => {}
   return (
     <div
       className={
