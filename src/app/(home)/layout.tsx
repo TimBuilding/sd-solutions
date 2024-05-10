@@ -23,7 +23,7 @@ const Layout: FC<Props> = async ({ children }) => {
   return (
     <div className={'flex w-full flex-col'}>
       <Navbar />
-      <main className={'mx-auto w-full max-w-7xl px-2.5 py-5'}>{children}</main>
+      <main>{children}</main>
     </div>
   )
 }

@@ -8,13 +8,15 @@ interface Props {
 
 const NewsfeedLayout: FC<Props> = ({ children }) => {
   return (
-    <div className={'flex w-full flex-row gap-7'}>
-      <div className={'hidden w-full max-w-xs lg:flex'}>
-        <RecommendedFeed />
-      </div>
-      <div className={'w-full'}>{children}</div>
-      <div className={'hidden w-full max-w-xs lg:flex'}>
-        <LatestAnnouncement />
+    <div className={'mx-auto w-full max-w-7xl px-2.5 py-5'}>
+      <div className={'flex w-full flex-row gap-7'}>
+        <div className={'hidden w-full max-w-xs lg:flex'}>
+          <RecommendedFeed />
+        </div>
+        <div className={'w-full'}>{children}</div>
+        <div className={'hidden w-full max-w-xs lg:flex'}>
+          <LatestAnnouncement />
+        </div>
       </div>
     </div>
   )
