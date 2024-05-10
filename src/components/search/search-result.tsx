@@ -2,6 +2,9 @@ import React, { FC } from 'react'
 import { Button } from '@/components/ui/button'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import { Tables } from '@/types/database.types'
+import { useMutation } from '@tanstack/react-query'
+import createConnection from '@/queries/create-connection'
+import { useToast } from '@/components/ui/use-toast'
 
 interface Props {
   profile: Tables<'user_profiles'>
@@ -9,8 +12,24 @@ interface Props {
 
 const SearchResult: FC<Props> = ({ profile }) => {
   const config = genConfig(profile.email || 'email')
+  const { toast } = useToast()
 
-  const handleConnect = () => {}
+  const { mutateAsync } = useMutation({
+    mutationKey: ['connect', profile.user_id],
+    mutationFn: createConnection,
+    onError: (err: any) => {
+      toast({
+        variant: 'destructive',
+        title: 'Something went wrong',
+        description: err.message,
+      })
+    },
+  })
+
+  const handleConnect = async () => {
+    await mutateAsync(profile.user_id)
+    console.log('Connected')
+  }
   return (
     <div
       className={
@@ -23,7 +42,9 @@ const SearchResult: FC<Props> = ({ profile }) => {
           {profile.first_name} {profile.last_name}
         </span>
       </div>
-      <Button variant={'outline'}>Connect</Button>
+      <Button variant={'outline'} onClick={() => handleConnect()}>
+        Connect
+      </Button>
     </div>
   )
 }
