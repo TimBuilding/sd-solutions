@@ -27,3 +27,8 @@ create trigger create_user_profile
   after insert on auth.users
   for each row
   execute procedure public.create_user_profile();
+
+-- first_name & last_name search
+create function first_last_name(user_profiles) returns text as $$
+  select $1.first_name || ' ' || $1.last_name;
+$$ language sql immutable;
