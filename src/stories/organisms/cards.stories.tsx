@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import RecommendedFeed from '@/components/newsfeed-cards/recommended-feed'
 import LatestAnnouncement from '@/components/newsfeed-cards/latest-announcement'
+import PostAnnouncement from '@/components/announcement-cards/post-announcement'
 
 const meta: Meta = {
   title: 'Organisms/Cards',
@@ -17,4 +18,8 @@ export const RecommendedFeeds: Story = {
 
 export const LatestAnnouncements: Story = {
   render: () => <LatestAnnouncement />,
+}
+
+export const AnnouncementPosts: Story = {
+  render: () => <PostAnnouncement />,
 }
