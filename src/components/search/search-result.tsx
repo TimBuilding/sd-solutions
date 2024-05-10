@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Button } from '@/components/ui/button'
 import Avatar, { genConfig } from 'react-nice-avatar'
+import { Tables } from '@/types/database.types'
 
-const email = 'monds@gmail.com'
-const SearchResult = () => {
-  const config = genConfig(email)
+interface Props {
+  profile: Tables<'user_profiles'>
+}
+
+const SearchResult: FC<Props> = ({ profile }) => {
+  const config = genConfig(profile.email || 'email')
 
   return (
     <div
@@ -14,7 +18,9 @@ const SearchResult = () => {
     >
       <div className={'flex flex-row items-center justify-center gap-2'}>
         <Avatar className={'h-9 w-9 rounded-full'} {...config} />
-        <span>Monds Francisco</span>
+        <span>
+          {profile.first_name} {profile.last_name}
+        </span>
       </div>
       <Button variant={'outline'}>Connect</Button>
     </div>

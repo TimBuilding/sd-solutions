@@ -58,15 +58,15 @@ export type Database = {
             foreignKeyName: 'connections_connection_user_id_fkey'
             columns: ['connection_user_id']
             isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
           },
           {
             foreignKeyName: 'connections_user_id_fkey'
             columns: ['user_id']
             isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
           },
         ]
       }
@@ -94,33 +94,37 @@ export type Database = {
             foreignKeyName: 'newsfeed_user_id_fkey'
             columns: ['user_id']
             isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
           },
         ]
       }
-      user_profile: {
+      user_profiles: {
         Row: {
           created_at: string | null
+          email: string | null
           first_name: string | null
           last_name: string | null
           user_id: string
+          first_last_name: string | null
         }
         Insert: {
           created_at?: string | null
+          email?: string | null
           first_name?: string | null
           last_name?: string | null
           user_id: string
         }
         Update: {
           created_at?: string | null
+          email?: string | null
           first_name?: string | null
           last_name?: string | null
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: 'user_profile_user_id_fkey'
+            foreignKeyName: 'user_profiles_user_id_fkey'
             columns: ['user_id']
             isOneToOne: true
             referencedRelation: 'users'
@@ -133,7 +137,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      first_last_name: {
+        Args: {
+          '': unknown
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

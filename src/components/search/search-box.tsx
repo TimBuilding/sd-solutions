@@ -12,11 +12,9 @@ interface Props {
 
 const SearchBox: FC<Props> = ({ setIsSearchOpen }) => {
   const [search, setSearch] = useState('')
-  const [debouncedSearch] = useDebounce(search, 2000)
+  const [debouncedSearch] = useDebounce(search, 800)
 
-  const { isFetching, isError, data, error } = useSearch(debouncedSearch)
-
-  console.log(data)
+  const queryResult = useSearch(debouncedSearch)
 
   return (
     <div className={'relative mx-auto w-full max-w-3xl'}>
@@ -32,7 +30,7 @@ const SearchBox: FC<Props> = ({ setIsSearchOpen }) => {
           'absolute right-3 top-3 h-4 w-4 cursor-pointer text-[#999999]'
         }
       />
-      <SearchResultDropdown />
+      <SearchResultDropdown result={queryResult} />
     </div>
   )
 }
