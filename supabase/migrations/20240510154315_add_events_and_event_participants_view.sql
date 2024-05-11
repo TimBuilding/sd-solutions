@@ -1,28 +1,24 @@
-CREATE VIEW events_with_participants AS
-SELECT 
-    e.title AS event_title,
-    up.first_name,
-    up.last_name,
-    up.email,
-    ep.created_at,
-    'event' AS type
-FROM 
-    events e
-JOIN 
-    event_participants ep ON e.id = ep.event_id
-JOIN
-    user_profiles up ON ep.user_id = up.user_id
-UNION ALL
-SELECT 
-    e.title AS event_title,
-    up.first_name,
-    up.last_name,
-    up.email,
-    ep.created_at,
-    'participant' AS type
-FROM 
-    event_participants ep
-JOIN 
-    events e ON e.id = ep.event_id
-JOIN
-    user_profiles up ON ep.user_id = up.user_id;
+create view events_with_participants as
+select
+  e.title as event_title,
+  e.created_at,
+  'event' as type,
+  up.first_name,
+  up.last_name,
+  up.email
+from
+  events e
+  join event_participants ep on e.id = ep.event_id
+  join user_profiles up on ep.user_id = up.user_id
+union
+select
+  e.title as event_title,
+  ep.created_at,
+  'participant' as type,
+  up.first_name,
+  up.last_name,
+  up.email
+from
+  event_participants ep
+  join events e on ep.event_id = e.id
+  join user_profiles up on ep.user_id = up.user_id;
