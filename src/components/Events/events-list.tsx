@@ -32,7 +32,7 @@ const EventsList = () => {
   return (
     <div
       className={
-        'hidden h-screen w-64 flex-shrink-0 flex-col divide-y divide-border overflow-y-auto border-r border-border bg-card lg:flex'
+        'hidden h-full min-h-screen w-64 flex-shrink-0 flex-col divide-y divide-border overflow-y-auto border-r border-border bg-card lg:flex'
       }
     >
       <ListItem timestamp={'2021-05-05T20:00:00'} isActive={true} />
