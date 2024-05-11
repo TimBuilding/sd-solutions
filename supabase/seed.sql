@@ -68,7 +68,7 @@ INSERT INTO
             auth.users
     );
 
--- Inserting mock events
+-- Inserting mock events with randomized dates within this year
 INSERT INTO events (
     user_id,
     title,
@@ -79,8 +79,28 @@ INSERT INTO events (
         user_id,
         'Event Title ' || (ROW_NUMBER() OVER ()),
         'This is a description of event ' || (ROW_NUMBER() OVER ()),
-        current_timestamp
+        TIMESTAMP '2023-01-01 00:00:00' + random() * (EXTRACT(EPOCH FROM TIMESTAMP '2023-12-31 23:59:59' - TIMESTAMP '2023-01-01 00:00:00')) * INTERVAL '1 second'
     FROM user_profiles
     ORDER BY random()
     LIMIT 5 -- Limiting to 5 random events
+);
+
+
+-- Inserting mock event_participants with randomized dates within this year
+INSERT INTO event_participants (
+    event_id,
+    user_id,
+    created_at
+) (
+    SELECT
+        e.id AS event_id,
+        up.user_id,
+        TIMESTAMP '2023-01-01 00:00:00' + random() * (EXTRACT(EPOCH FROM TIMESTAMP '2023-12-31 23:59:59' - TIMESTAMP '2023-01-01 00:00:00')) * INTERVAL '1 second'
+    FROM
+        events e
+    CROSS JOIN
+        user_profiles up
+    ORDER BY
+        random()
+    LIMIT 10 -- Limiting to 10 random event participants
 );
