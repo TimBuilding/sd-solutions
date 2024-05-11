@@ -55,7 +55,7 @@ const EventsList: FC<Props> = ({ initialData }) => {
   return (
     <div
       className={
-        'hidden h-full min-h-screen w-64 flex-shrink-0 flex-col divide-y divide-border overflow-y-auto border-r border-border bg-card lg:flex'
+        'fixed left-0 top-0 z-0 mt-14 hidden h-full w-64 flex-shrink-0 flex-col divide-y divide-border overflow-y-auto overflow-x-hidden border-r border-border bg-card pt-1 lg:flex'
       }
     >
       {data.map((event) => (

@@ -21,7 +21,11 @@ const EventsFeed: FC<Props> = ({ initialData }) => {
   })
 
   return (
-    <div className={'flex w-full flex-shrink flex-col divide-y divide-border'}>
+    <div
+      className={
+        'flex w-full flex-shrink flex-col divide-y divide-border lg:ml-64'
+      }
+    >
       {isPending &&
         [...Array(5)].map((_, index) => <LoadingEvents key={index} />)}
       {data?.map((event) => (

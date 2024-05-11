@@ -14,7 +14,7 @@ const EventsPage = async () => {
   const initialEvents = await getEvents(supabase)
 
   return (
-    <div className="flex flex-row items-start justify-center">
+    <div className="relative flex flex-row items-start justify-center">
       <EventsList initialData={initialEvents} />
       <EventsFeed initialData={initialEvents} />
       <EventsActivity />

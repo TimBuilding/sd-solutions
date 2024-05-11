@@ -32,7 +32,7 @@ const EventsActivity = () => {
   return (
     <div
       className={
-        'hidden h-screen w-72 flex-shrink-0 overflow-y-auto border-l border-border bg-card xl:block 2xl:w-96'
+        'sticky right-0 top-0 hidden h-screen w-72 flex-shrink-0 overflow-y-auto border-l border-border bg-card xl:block 2xl:w-96'
       }
     >
       <div className={'px-8 py-5'}>
