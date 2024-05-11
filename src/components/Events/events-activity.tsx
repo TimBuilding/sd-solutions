@@ -3,23 +3,42 @@ import React, { FC } from 'react'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import { formatDistance } from 'date-fns'
 
+import { createBrowserClient } from '@/utils/supabase'
+import { useQuery } from '@tanstack/react-query'
+import getEventActivities from '@/queries/get-event-activities'
+import { Tables } from '@/types/database.types'
+
 const ActivityItem: FC<{
-  name: string
-  email: string
-  event: string
-  timestamp: string
-}> = ({ name, email, event, timestamp }) => {
-  const config1 = genConfig(email)
+  activity: Tables<'events_with_participants'>
+}> = ({ activity }) => {
+  const config1 = genConfig(activity.email || '')
   return (
     <div className={'flex flex-row items-start justify-start gap-2.5 py-2.5'}>
       <Avatar className={'h-8 w-8 flex-shrink-0 rounded-full'} {...config1} />
       <div>
         <p className={'text-sm leading-5'}>
-          <span className={'font-medium'}>{name}</span> is now participating to
-          the <span className={'font-medium'}>{event}</span> event.
+          {activity.type === 'event' ? (
+            <>
+              <span className={'font-medium'}>
+                {activity.first_name} {activity.last_name}
+              </span>{' '}
+              created the{' '}
+              <span className={'font-medium'}>{activity.event_title}</span>{' '}
+              event.
+            </>
+          ) : (
+            <>
+              <span className={'font-medium'}>
+                {activity.first_name} {activity.last_name}
+              </span>{' '}
+              is now participating to the{' '}
+              <span className={'font-medium'}>{activity.event_title}</span>{' '}
+              event.
+            </>
+          )}
         </p>
         <span className={'text-sm leading-5 text-muted-foreground/40'}>
-          {formatDistance(new Date(timestamp), new Date(), {
+          {formatDistance(new Date(activity.created_at || ''), new Date(), {
             addSuffix: true,
           })}
         </span>
@@ -29,6 +48,12 @@ const ActivityItem: FC<{
 }
 
 const EventsActivity = () => {
+  const supabase = createBrowserClient()
+  const { data } = useQuery({
+    queryKey: ['events_activity'],
+    queryFn: () => getEventActivities(supabase),
+  })
+
   return (
     <div
       className={
@@ -41,24 +66,9 @@ const EventsActivity = () => {
         </h2>
       </div>
       <div className={'px-5'}>
-        <ActivityItem
-          name={'David Kim'}
-          event={'Awesome Pool Party with Friends'}
-          email={'david@gmail.com'}
-          timestamp={'2021-08-01T12:00:00Z'}
-        />
-        <ActivityItem
-          name={'David Kim'}
-          event={'Awesome Pool Party with Friends'}
-          email={'david@gmail.com'}
-          timestamp={'2021-08-01T12:00:00Z'}
-        />
-        <ActivityItem
-          name={'David Kim'}
-          event={'Awesome Pool Party with Friends'}
-          email={'david@gmail.com'}
-          timestamp={'2021-08-01T12:00:00Z'}
-        />
+        {data?.map((activity, i) => (
+          <ActivityItem key={i} activity={activity} />
+        ))}
       </div>
     </div>
   )

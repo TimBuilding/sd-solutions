@@ -205,7 +205,17 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      events_with_participants: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          event_title: string | null
+          first_name: string | null
+          last_name: string | null
+          type: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       first_last_name: {
