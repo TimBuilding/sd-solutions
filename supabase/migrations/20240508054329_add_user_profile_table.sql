@@ -1,8 +1,11 @@
+create type role as enum ('user', 'admin');
+
 create table user_profiles (
   user_id uuid primary key references auth.users(id) on delete cascade,
   first_name text,
   last_name text,
   email text,
+  role role default 'user',
   created_at timestamp with time zone default now()
 );
 
