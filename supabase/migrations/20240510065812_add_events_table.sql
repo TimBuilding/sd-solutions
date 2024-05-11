@@ -1,5 +1,5 @@
 create table events (
-  id uuid primary key default gen_random_uuid(),
+  id uuid primary key default uuid_generate_v4(),
   user_id uuid references user_profiles on delete cascade not null,
   title text not null,
   content text not null,
