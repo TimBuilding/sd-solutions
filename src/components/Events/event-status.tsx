@@ -4,22 +4,21 @@ import {
   getParticipantEmails,
 } from '@/app/(home)/events/format-participants'
 import { Button } from '@/components/ui/button'
+import createEventParticipant from '@/queries/create-event-participant'
 import getEventParticipants from '@/queries/get-event-participants'
 import { Tables } from '@/types/database.types'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { Hand } from 'lucide-react'
 import { FC } from 'react'
 import Avatar, { genConfig } from 'react-nice-avatar'
+import { useToast } from '../ui/use-toast'
+import ParticipateButton from './participate-button'
 
 interface Props {
   event: Tables<'events'>
 }
 
 const EventStatus: FC<Props> = ({ event }) => {
-  const config1 = genConfig('email1@gmail.com')
-  const config2 = genConfig('email2@gmail.com')
-  const config3 = genConfig('email3@gmail.com')
-
   const { data } = useQuery({
     queryKey: ['event_participants', event.id],
     queryFn: () => getEventParticipants(event.id),
@@ -53,13 +52,7 @@ const EventStatus: FC<Props> = ({ event }) => {
               : ''}
           </span>
         </div>
-        <Button
-          variant={'outline'}
-          size={'interactions'}
-          className={'text-muted-foreground/50'}
-        >
-          <Hand className={'h-4 w-4'} />
-        </Button>
+        <ParticipateButton event={event} />
       </div>
     </div>
   )
