@@ -24,4 +24,13 @@ const formatParticipants = (participants: Participant[]): string => {
   return names.slice(0, 2).join(', ')
 }
 
-export default formatParticipants
+const countParticipants = (participants: Participant[]): number => {
+  const participantCount = participants.length
+  if (participantCount > 2) {
+    return participantCount - 2
+  } else {
+    return 0
+  }
+}
+
+export { formatParticipants, countParticipants }

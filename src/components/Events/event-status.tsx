@@ -1,4 +1,7 @@
-import formatParticipants from '@/app/(home)/events/format-participants'
+import {
+  countParticipants,
+  formatParticipants,
+} from '@/app/(home)/events/format-participants'
 import { Button } from '@/components/ui/button'
 import getEventParticipants from '@/queries/get-event-participants'
 import { Tables } from '@/types/database.types'
@@ -21,7 +24,6 @@ const EventStatus: FC<Props> = ({ event }) => {
     queryFn: () => getEventParticipants(event.id),
   })
 
-  console.log(data)
   return (
     <div className={'mt-2.5 flex w-full flex-row items-center justify-start'}>
       <div className={'flex w-fit flex-row items-center justify-center'}>
@@ -50,7 +52,9 @@ const EventStatus: FC<Props> = ({ event }) => {
               : 'No participants'}
           </span>
           <span className={'text-xs leading-6 text-card-foreground/30'}>
-            and 23 more are participating
+            {data && data.length > 2
+              ? `and ${countParticipants(data)} more are participating`
+              : ''}
           </span>
         </div>
         <Button
