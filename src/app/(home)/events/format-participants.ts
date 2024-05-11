@@ -5,6 +5,7 @@ type Participant = Tables<'event_participants'> & {
   user_profiles: {
     first_name: string
     user_id: string
+    email: string
   }
 }
 
@@ -33,4 +34,8 @@ const countParticipants = (participants: Participant[]): number => {
   }
 }
 
-export { formatParticipants, countParticipants }
+const getParticipantEmails = (participant: Participant[]): string[] => {
+  return participant.slice(0, 3).map((p) => p.user_profiles.email)
+}
+
+export { formatParticipants, countParticipants, getParticipantEmails }

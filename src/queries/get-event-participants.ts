@@ -13,7 +13,7 @@ const getEventParticipants = async (event_id: string) => {
 
   const { data, error } = await supabase
     .from('event_participants')
-    .select('*, user_profiles(first_name, user_id)')
+    .select('*, user_profiles(first_name, user_id, email)')
     .eq('event_id', event_id)
 
   if (error) {

@@ -1,6 +1,7 @@
 import {
   countParticipants,
   formatParticipants,
+  getParticipantEmails,
 } from '@/app/(home)/events/format-participants'
 import { Button } from '@/components/ui/button'
 import getEventParticipants from '@/queries/get-event-participants'
@@ -27,22 +28,17 @@ const EventStatus: FC<Props> = ({ event }) => {
   return (
     <div className={'mt-2.5 flex w-full flex-row items-center justify-start'}>
       <div className={'flex w-fit flex-row items-center justify-center'}>
-        <Avatar
-          className={'z-0 h-10 w-10 rounded-full border-4 border-card'}
-          {...config1}
-        />
-        <Avatar
-          className={
-            'z-10 h-10 w-10 -translate-x-3 rounded-full border-4 border-card'
-          }
-          {...config2}
-        />
-        <Avatar
-          className={
-            'z-20 h-10 w-10 -translate-x-6 rounded-full border-4 border-card'
-          }
-          {...config3}
-        />
+        {data &&
+          data.length > 0 &&
+          getParticipantEmails(data).map((email, index) => (
+            <Avatar
+              key={index}
+              className={`z-${index * 10} h-10 w-10 ${
+                index > 0 ? `-translate-x-${3 * index}` : ''
+              } rounded-full border-4 border-card`}
+              {...genConfig(email)}
+            />
+          ))}
       </div>
       <div className={'flex w-full flex-row items-center justify-between'}>
         <div className={'flex flex-col'}>
