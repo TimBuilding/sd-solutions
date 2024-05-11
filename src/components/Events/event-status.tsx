@@ -1,13 +1,27 @@
-import React from 'react'
-import Avatar, { genConfig } from 'react-nice-avatar'
+import formatParticipants from '@/app/(home)/events/format-participants'
 import { Button } from '@/components/ui/button'
+import getEventParticipants from '@/queries/get-event-participants'
+import { Tables } from '@/types/database.types'
+import { useQuery } from '@tanstack/react-query'
 import { Hand } from 'lucide-react'
+import { FC } from 'react'
+import Avatar, { genConfig } from 'react-nice-avatar'
 
-const EventStatus = () => {
+interface Props {
+  event: Tables<'events'>
+}
+
+const EventStatus: FC<Props> = ({ event }) => {
   const config1 = genConfig('email1@gmail.com')
   const config2 = genConfig('email2@gmail.com')
   const config3 = genConfig('email3@gmail.com')
 
+  const { data } = useQuery({
+    queryKey: ['event_participants', event.id],
+    queryFn: () => getEventParticipants(event.id),
+  })
+
+  console.log(data)
   return (
     <div className={'mt-2.5 flex w-full flex-row items-center justify-start'}>
       <div className={'flex w-fit flex-row items-center justify-center'}>
@@ -31,7 +45,9 @@ const EventStatus = () => {
       <div className={'flex w-full flex-row items-center justify-between'}>
         <div className={'flex flex-col'}>
           <span className={'text-xs leading-5 text-card-foreground/90'}>
-            You, David
+            {data && data.length > 0
+              ? formatParticipants(data).toString()
+              : 'No participants'}
           </span>
           <span className={'text-xs leading-6 text-card-foreground/30'}>
             and 23 more are participating

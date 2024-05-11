@@ -28,29 +28,7 @@ const EventsFeed: FC<Props> = ({ initialData }) => {
     >
       {isPending &&
         [...Array(5)].map((_, index) => <LoadingEvents key={index} />)}
-      {data?.map((event) => (
-        <EventItem
-          key={event.id}
-          title={event.title}
-          date={event.created_at}
-          content={event.content}
-        />
-      ))}
-      <EventItem
-        title={'Awesome Pool Party with Friends'}
-        date={'2021-08-01T12:00:00Z'}
-        content={'hello world'}
-      />
-      <EventItem
-        title={'Awesome Pool Party with Friends'}
-        date={'2021-08-01T12:00:00Z'}
-        content={'hello world'}
-      />
-      <EventItem
-        title={'Awesome Pool Party with Friends'}
-        date={'2021-08-01T12:00:00Z'}
-        content={'hello world'}
-      />
+      {data?.map((event) => <EventItem key={event.id} event={event} />)}
     </div>
   )
 }

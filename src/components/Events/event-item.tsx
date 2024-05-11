@@ -2,28 +2,29 @@ import React, { FC } from 'react'
 import { format } from 'date-fns'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import EventStatus from '@/components/Events/event-status'
+import { useQuery } from '@tanstack/react-query'
+import getEventParticipants from '@/queries/get-event-participants'
+import { Tables } from '@/types/database.types'
 
 interface Props {
-  title: string
-  date: string
-  content: string
+  event: Tables<'events'>
 }
 
-const EventItem: FC<Props> = ({ title, date, content }) => {
-  const config1 = genConfig('email1@gmail.com')
-  const config2 = genConfig('email2@gmail.com')
-  const config3 = genConfig('email3@gmail.com')
-
+const EventItem: FC<Props> = ({ event }) => {
   return (
     <div
       className={'flex w-full flex-col bg-card px-8 py-10 text-card-foreground'}
     >
-      <h2 className={'w-72 text-2xl font-extrabold md:text-3xl'}>{title}</h2>
+      <h2 className={'w-72 text-2xl font-extrabold md:text-3xl'}>
+        {event.title}
+      </h2>
       <span className={'mt-10 leading-6 text-card-foreground/40'}>
-        {format(new Date(date), 'MMMM d, yyyy')}
+        {format(new Date(event.created_at || ''), 'MMMM d, yyyy')}
       </span>
-      <p className={'mt-2.5 leading-6 text-card-foreground/60'}>{content}</p>
-      <EventStatus />
+      <p className={'mt-2.5 leading-6 text-card-foreground/60'}>
+        {event.content}
+      </p>
+      <EventStatus event={event} />
     </div>
   )
 }
