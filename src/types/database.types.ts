@@ -70,6 +70,38 @@ export type Database = {
           },
         ]
       }
+      events: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'events_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
+          },
+        ]
+      }
       newsfeed: {
         Row: {
           content: string
@@ -105,6 +137,7 @@ export type Database = {
           email: string | null
           first_name: string | null
           last_name: string | null
+          role: Database['public']['Enums']['role'] | null
           user_id: string
           first_last_name: string | null
         }
@@ -113,6 +146,7 @@ export type Database = {
           email?: string | null
           first_name?: string | null
           last_name?: string | null
+          role?: Database['public']['Enums']['role'] | null
           user_id: string
         }
         Update: {
@@ -120,6 +154,7 @@ export type Database = {
           email?: string | null
           first_name?: string | null
           last_name?: string | null
+          role?: Database['public']['Enums']['role'] | null
           user_id?: string
         }
         Relationships: [
@@ -145,7 +180,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      role: 'user' | 'admin'
     }
     CompositeTypes: {
       [_ in never]: never

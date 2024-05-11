@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from 'react'
 import { Calendar } from 'lucide-react'
 import { cn } from '@/utils/tailwind'
@@ -31,7 +32,7 @@ const EventsList = () => {
   return (
     <div
       className={
-        'flex h-screen w-64 flex-col divide-y divide-border overflow-y-auto border-r border-border bg-card'
+        'hidden h-screen w-64 flex-shrink-0 flex-col divide-y divide-border overflow-y-auto border-r border-border bg-card lg:flex'
       }
     >
       <ListItem timestamp={'2021-05-05T20:00:00'} isActive={true} />

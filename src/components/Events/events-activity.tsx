@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from 'react'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import { formatDistance } from 'date-fns'
@@ -31,7 +32,7 @@ const EventsActivity = () => {
   return (
     <div
       className={
-        'h-screen w-72 overflow-y-auto border-l border-border bg-card xl:w-96'
+        'hidden h-screen w-72 flex-shrink-0 overflow-y-auto border-l border-border bg-card xl:block 2xl:w-96'
       }
     >
       <div className={'px-8 py-5'}>
