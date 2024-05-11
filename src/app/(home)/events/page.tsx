@@ -15,7 +15,7 @@ const EventsPage = async () => {
 
   return (
     <div className="flex flex-row items-start justify-center">
-      <EventsList />
+      <EventsList initialData={initialEvents} />
       <EventsFeed initialData={initialEvents} />
       <EventsActivity />
     </div>

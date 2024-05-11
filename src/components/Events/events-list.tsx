@@ -1,7 +1,12 @@
 'use client'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Calendar } from 'lucide-react'
 import { cn } from '@/utils/tailwind'
+import { createBrowserClient } from '@/utils/supabase'
+import { useQuery } from '@tanstack/react-query'
+import { Tables } from '@/types/database.types'
+import getEvents from '@/queries/get-events'
+import { format } from 'date-fns'
 
 const ListItem: FC<{
   timestamp: string
@@ -21,23 +26,45 @@ const ListItem: FC<{
             'h-5 w-5',
           )}
         />
-        <span className={'text-sm font-medium'}>May 5th</span>
+        <span className={'text-sm font-medium'}>
+          {format(new Date(timestamp), 'MMM do')}
+        </span>
       </div>
-      <span className={'text-xs text-muted-foreground/50'}>at 08:00 pm</span>
+      <span className={'text-xs text-muted-foreground/50'}>
+        {format(new Date(timestamp), 'p')}
+      </span>
     </div>
   )
 }
 
-const EventsList = () => {
+interface Props {
+  initialData: Tables<'events'>[]
+}
+
+const EventsList: FC<Props> = ({ initialData }) => {
+  const [activeTab, setActiveTab] = useState<number>(0)
+
+  const supabase = createBrowserClient()
+
+  const { data, isPending } = useQuery({
+    queryKey: ['events'],
+    queryFn: () => getEvents(supabase),
+    initialData,
+  })
+
   return (
     <div
       className={
         'hidden h-full min-h-screen w-64 flex-shrink-0 flex-col divide-y divide-border overflow-y-auto border-r border-border bg-card lg:flex'
       }
     >
-      <ListItem timestamp={'2021-05-05T20:00:00'} isActive={true} />
-      <ListItem timestamp={'2021-05-05T20:00:00'} />
-      <ListItem timestamp={'2021-05-05T20:00:00'} />
+      {data.map((event) => (
+        <ListItem
+          key={event.id}
+          timestamp={event.created_at}
+          isActive={activeTab === data.indexOf(event)}
+        />
+      ))}
     </div>
   )
 }
