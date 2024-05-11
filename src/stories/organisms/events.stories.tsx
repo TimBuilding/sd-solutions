@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import EventItem from '@/components/Events/event-item'
 import EventsList from '@/components/Events/events-list'
+import EventsActivity from '@/components/Events/events-activity'
 
 const meta: Meta = {
   title: 'Organisms/Events',
@@ -22,4 +23,8 @@ export const StoryItemComponent: Story = {
 
 export const EventsListSideBar: Story = {
   render: () => <EventsList />,
+}
+
+export const EventsActivitySideBar: Story = {
+  render: () => <EventsActivity />,
 }
