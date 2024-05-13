@@ -8,6 +8,8 @@ import { Activity } from 'lucide-react'
 import MobileItemsDropdown, {
   MobileProps,
 } from '@/components/layout/mobile-items-dropdown'
+import { useUser } from '@/providers/UserProvider'
+import Avatar, { genConfig } from 'react-nice-avatar'
 
 const MobileItems: MobileProps[] = [
   {
@@ -34,6 +36,9 @@ const MobileItems: MobileProps[] = [
 
 const MobileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const user = useUser()
+
+  const config = genConfig(user?.user_id ?? '')
 
   return (
     <div className="lg:hidden">
@@ -63,7 +68,7 @@ const MobileDropdown = () => {
       {isOpen && (
         <div className="absolute left-0 right-0 z-0 mt-2 flex w-full flex-col gap-2 bg-white px-4 py-2 drop-shadow-md ">
           <div className="flex flex-row items-center gap-1.5">
-            <div className="h-6 w-6 rounded-full bg-primary"></div>
+            <Avatar {...config} className="h-6 w-6 rounded-full" />
             <span className="text-xs font-normal"> JANE DOE </span>
           </div>
           <div className="border border-[#E6E6E6]"></div>

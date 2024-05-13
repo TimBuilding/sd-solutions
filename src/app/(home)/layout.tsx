@@ -4,6 +4,7 @@ import Navbar from '@/components/layout/Navbar'
 import { createServerClient } from '@/utils/supabase'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { UserProvider } from '@/providers/UserProvider'
 
 interface Props {
   children: ReactNode
@@ -20,11 +21,24 @@ const Layout: FC<Props> = async ({ children }) => {
     redirect('/login')
   }
 
+  // get user profile
+  const { data: userProfile, error } = await supabase
+    .from('user_profiles')
+    .select('*')
+    .eq('user_id', user.id)
+    .single()
+
+  if (error) {
+    redirect('/login')
+  }
+
   return (
-    <div className={'flex w-full flex-col'}>
-      <Navbar />
-      <main>{children}</main>
-    </div>
+    <UserProvider userProfile={userProfile}>
+      <div className={'flex w-full flex-col'}>
+        <Navbar />
+        <main>{children}</main>
+      </div>
+    </UserProvider>
   )
 }
 export default Layout
