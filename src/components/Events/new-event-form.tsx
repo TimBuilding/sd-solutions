@@ -1,25 +1,81 @@
 'use client'
-import { createBrowserClient } from '@/utils/supabase'
-import Avatar, { genConfig } from 'react-nice-avatar'
-import { FormField, FormItem, FormLabel } from '../ui/form'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Textarea } from '../ui/textarea'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
+import { Form, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
+import EventSchema from './event-schema'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import createEvent from './create-event'
+import { useToast } from '../ui/use-toast'
 
 const NewEventForm = () => {
+  const form = useForm<z.infer<typeof EventSchema>>({
+    resolver: zodResolver(EventSchema),
+    defaultValues: {
+      title: '',
+      content: '',
+    },
+  })
+  const { toast } = useToast()
+
+  const { mutateAsync } = useMutation({
+    mutationKey: ['createEvent'],
+    mutationFn: (data: z.infer<typeof EventSchema>) => createEvent(data),
+    onSuccess: () => {
+      toast({
+        title: 'Event Created',
+        description: 'Your event has been created successfully!',
+      })
+    },
+    onError: (error) => {
+      toast({
+        variant: 'destructive',
+        title: 'Something went wrong',
+        description: error.message,
+      })
+    },
+  })
+
+  const handleSubmit: SubmitHandler<z.infer<typeof EventSchema>> = async (
+    data,
+  ) => {
+    await mutateAsync(data)
+  }
+
   return (
-    <form className="mt-4 flex w-full flex-col items-center justify-center gap-4">
-      <div className="flex w-full flex-col gap-2">
-        <Label>Event Name</Label>
-        <Input className="w-full" />
-      </div>
-      <div className="flex w-full flex-col gap-2">
-        <Label>Event Content</Label>
-        <Textarea className="w-full " />
-      </div>
-      <Button className="w-full">Create Event</Button>
-    </form>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="mt-4 flex w-full flex-col items-center justify-center gap-4"
+      >
+        <FormField
+          name="title"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel>Event Title</FormLabel>
+              <Input {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="content"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel>Event Content</FormLabel>
+              <Textarea {...field} rows={10} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-full">
+          Create Event
+        </Button>
+      </form>
+    </Form>
   )
 }
 
