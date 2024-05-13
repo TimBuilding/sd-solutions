@@ -104,3 +104,39 @@ INSERT INTO event_participants (
         random()
     LIMIT 10 -- Limiting to 10 random event participants
 );
+
+
+-- Inserting mock newsfeed posts
+INSERT INTO newsfeed (
+    user_id,
+    content,
+    created_at
+) (
+    SELECT
+        user_id AS user_id,
+        'This is a sample post content ' || (ROW_NUMBER() OVER ()),
+        TIMESTAMP '2023-01-01 00:00:00' + random() * (EXTRACT(EPOCH FROM TIMESTAMP '2023-12-31 23:59:59' - TIMESTAMP '2023-01-01 00:00:00')) * INTERVAL '1 second'
+    FROM user_profiles
+    ORDER BY random()
+    LIMIT 10 -- Limiting to 10 random newsfeed posts
+);
+
+
+-- Inserting mock newsfeed likes
+INSERT INTO newsfeed_likes (
+    user_id,
+    newsfeed_id,
+    created_at
+) (
+    SELECT
+        up.user_id,
+        nf.id AS newsfeed_id,
+        TIMESTAMP '2023-01-01 00:00:00' + random() * (EXTRACT(EPOCH FROM TIMESTAMP '2023-12-31 23:59:59' - TIMESTAMP '2023-01-01 00:00:00')) * INTERVAL '1 second'
+    FROM
+        user_profiles up
+    CROSS JOIN
+        newsfeed nf
+    ORDER BY
+        random()
+    LIMIT 20 -- Limiting to 20 random newsfeed likes
+);
