@@ -1,34 +1,51 @@
 'use client'
-import React from 'react'
+import {
+  countLikers,
+  formatLikers,
+  getLikerUserIds,
+} from '@/app/(home)/(feed)/format-likers'
+import getNewsfeedLikes from '@/queries/get-newsfeed_likes'
+import { useQuery } from '@tanstack/react-query'
 import { Heart, Link2, MessageCircle } from 'lucide-react'
 import Avatar, { genConfig } from 'react-nice-avatar'
+import { usePostContext } from './Post'
 
 const PostStatus = () => {
-  const config1 = genConfig('email1@gmail.com')
-  const config2 = genConfig('email2@gmail.com')
-  const config3 = genConfig('email3@gmail.com')
+  const { post } = usePostContext()
+
+  const { data } = useQuery({
+    queryKey: ['newsfeed_likes'],
+    queryFn: () => getNewsfeedLikes(post.id),
+  })
 
   return (
     <div
       className={'flex flex-row items-center justify-between px-4 pb-4 pt-2.5'}
     >
       <div className={'flex flex-row items-center justify-center'}>
-        <Avatar
-          className={'z-0 h-9 w-9 rounded-full border-4 border-card'}
-          {...config1}
-        />
-        <Avatar
-          className={
-            'z-10 h-9 w-9 -translate-x-3 rounded-full border-4 border-card'
-          }
-          {...config2}
-        />
-        <Avatar
-          className={
-            'z-20 h-9 w-9 -translate-x-6 rounded-full border-4 border-card'
-          }
-          {...config3}
-        />
+        {data &&
+          data.length > 0 &&
+          getLikerUserIds(data).map((userId, index) => (
+            <Avatar
+              key={index}
+              className={`z-${index * 10} h-10 w-10 ${
+                index > 0 ? `-translate-x-${3 * index}` : ''
+              } rounded-full border-4 border-card`}
+              {...genConfig(userId)}
+            />
+          ))}
+        <div className={'flex flex-col'}>
+          <span className={'text-xs leading-5 text-card-foreground/90'}>
+            {data && data.length > 0
+              ? formatLikers(data).toString()
+              : 'No one liked this'}
+          </span>
+          <span className={'text-xs leading-6 text-card-foreground/30'}>
+            {data && data.length > 2
+              ? `and ${countLikers(data)} more liked this`
+              : ''}
+          </span>
+        </div>
       </div>
       <div className={'flex flex-row items-center justify-center gap-3'}>
         <div
@@ -37,7 +54,7 @@ const PostStatus = () => {
           }
         >
           <Heart className={'h-4 w-4'} />
-          <span>2</span>
+          <span>{data && data.length > 0 ? countLikers(data) : 0}</span>
         </div>
         <div
           className={

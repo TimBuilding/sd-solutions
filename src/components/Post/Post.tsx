@@ -6,7 +6,7 @@ import PostInteractions from '@/components/Post/post-interactions'
 import PostStatus from '@/components/Post/post-status'
 import { Tables } from '@/types/database.types'
 
-type ExtendedPost = Tables<'newsfeed'> & {
+export type ExtendedPost = Tables<'newsfeed'> & {
   user_profiles: {
     first_name: string
     last_name: string
