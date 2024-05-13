@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator'
 
 const NewAnnouncements = () => {
   return (
-    <Card className="h-full w-full max-w-xs justify-between pr-12">
+    <Card className="h-full w-full max-w-xs justify-between">
       <CardHeader className="text-md font-bold text-[#393a4f]">
         Latest Announcements
       </CardHeader>

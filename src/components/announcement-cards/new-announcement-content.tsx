@@ -6,7 +6,7 @@ const NewAnnouncementContent = () => {
   const config = genConfig()
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-row items-center justify-between gap-4 pt-2">
+      <div className="flex flex-row items-center gap-4 pt-2">
         <div className="h-12 w-12 rounded-xl bg-primary"></div>
         <div className="flex flex-col">
           <span className="text-sm font-medium text-[#42435b]">
@@ -22,7 +22,7 @@ const NewAnnouncementContent = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center justify-between gap-4 pt-2">
+      <div className="flex flex-row items-center gap-4 pt-2">
         <div className="h-12 w-12 rounded-xl bg-primary"></div>
         <div className="flex flex-col">
           <span className="text-sm font-medium text-[#42435b]">
