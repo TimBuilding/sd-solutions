@@ -13,7 +13,7 @@ interface Props {
 }
 
 const SearchResult: FC<Props> = ({ profile }) => {
-  const config = genConfig(profile.email || 'email')
+  const config = genConfig(profile.user_id || '')
   const { toast } = useToast()
   const queryClient = useQueryClient()
 
