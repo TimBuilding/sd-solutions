@@ -167,6 +167,42 @@ export type Database = {
           },
         ]
       }
+      newsfeed_likes: {
+        Row: {
+          created_at: string | null
+          id: string
+          newsfeed_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          newsfeed_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          newsfeed_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'newsfeed_likes_newsfeed_id_fkey'
+            columns: ['newsfeed_id']
+            isOneToOne: false
+            referencedRelation: 'newsfeed'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'newsfeed_likes_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
+          },
+        ]
+      }
       user_profiles: {
         Row: {
           created_at: string | null
