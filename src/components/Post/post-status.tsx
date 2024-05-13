@@ -3,6 +3,7 @@ import {
   countLikers,
   formatLikers,
   getLikerUserIds,
+  getTotalLikes,
 } from '@/app/(home)/(feed)/format-likers'
 import getNewsfeedLikes from '@/queries/get-newsfeed_likes'
 import { useQuery } from '@tanstack/react-query'
@@ -54,7 +55,7 @@ const PostStatus = () => {
           }
         >
           <Heart className={'h-4 w-4'} />
-          <span>{data && data.length > 0 ? countLikers(data) : 0}</span>
+          <span>{data ? getTotalLikes(data) : 0}</span>
         </div>
         <div
           className={

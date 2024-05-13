@@ -24,6 +24,7 @@ const formatLikers = (likers: Liker[]): string => {
   return names.slice(0, 2).join(', ')
 }
 
+// this will show as "2 more people liked this"
 const countLikers = (likers: Liker[]): number => {
   const likerCount = likers.length
   if (likerCount > 2) {
@@ -32,8 +33,14 @@ const countLikers = (likers: Liker[]): number => {
     return 0
   }
 }
+
+// get total number of likes
+const getTotalLikes = (likers: Liker[]): number => {
+  return likers.length
+}
+
 const getLikerUserIds = (likers: Liker[]): string[] => {
   return likers.slice(0, 3).map((l) => l.user_profiles.user_id)
 }
 
-export { formatLikers, countLikers, getLikerUserIds }
+export { formatLikers, countLikers, getTotalLikes, getLikerUserIds }
