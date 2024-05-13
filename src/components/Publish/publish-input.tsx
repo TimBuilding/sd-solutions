@@ -1,13 +1,14 @@
-import React, { FC } from 'react'
-import { Textarea } from '@/components/ui/textarea'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { useFormContext } from 'react-hook-form'
 import {
   FormControl,
   FormField,
   FormItem,
   FormMessage,
 } from '@/components/ui/form'
+import { Textarea } from '@/components/ui/textarea'
+import { useUser } from '@/providers/UserProvider'
+import { FC } from 'react'
+import { useFormContext } from 'react-hook-form'
+import Avatar, { genConfig } from 'react-nice-avatar'
 
 interface Props {
   setIsOpen: (_isOpen: boolean) => void
@@ -16,13 +17,12 @@ interface Props {
 
 const PublishInput: FC<Props> = ({ setIsOpen, isPending }) => {
   const { control } = useFormContext()
+  const user = useUser()
+  const config = genConfig(user?.user_id ?? '')
 
   return (
     <div className={'flex flex-row gap-5 px-4 pb-10'}>
-      <Avatar>
-        <AvatarImage src={'https://picsum.photos/200/300'} />
-        <AvatarFallback>JD</AvatarFallback>
-      </Avatar>
+      <Avatar {...config} className="h-10 w-10 shrink-0 rounded-full" />
       <FormField
         control={control}
         name={'content'}

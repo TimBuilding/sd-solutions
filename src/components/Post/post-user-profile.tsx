@@ -4,11 +4,9 @@ import Avatar, { genConfig } from 'react-nice-avatar'
 import { usePostContext } from '@/components/Post/Post'
 import { format } from 'date-fns'
 
-const email = 'email@gmail.com'
-
 const PostUserProfile = () => {
   const { post } = usePostContext()
-  const config = genConfig(email)
+  const config = genConfig(post.user_id)
 
   return (
     <div className={'flex flex-row gap-2.5 px-4 pt-4'}>
