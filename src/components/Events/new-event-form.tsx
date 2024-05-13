@@ -1,8 +1,11 @@
 'use client'
-import { Button } from '../ui/button'
+import { createBrowserClient } from '@/utils/supabase'
+import Avatar, { genConfig } from 'react-nice-avatar'
+import { FormField, FormItem, FormLabel } from '../ui/form'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Textarea } from '../ui/textarea'
+import { Button } from '../ui/button'
 
 const NewEventForm = () => {
   return (

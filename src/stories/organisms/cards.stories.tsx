@@ -28,5 +28,3 @@ export const AnnouncementPosts: Story = {
 export const NewAnnouncement: Story = {
   render: () => <NewAnnouncements />,
 }
-
-
