@@ -15,7 +15,7 @@ const PostStatus = () => {
   const { post } = usePostContext()
 
   const { data } = useQuery({
-    queryKey: ['newsfeed_likes'],
+    queryKey: ['newsfeed_likes', post.id],
     queryFn: () => getNewsfeedLikes(post.id),
   })
 
