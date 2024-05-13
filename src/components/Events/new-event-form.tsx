@@ -7,11 +7,16 @@ import { Textarea } from '../ui/textarea'
 import EventSchema from './event-schema'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import createEvent from './create-event'
 import { useToast } from '../ui/use-toast'
+import { FC } from 'react'
 
-const NewEventForm = () => {
+interface Props {
+  setIsFormOpen: (_isFormOpen: boolean) => void
+}
+
+const NewEventForm: FC<Props> = ({ setIsFormOpen }) => {
   const form = useForm<z.infer<typeof EventSchema>>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
@@ -20,14 +25,21 @@ const NewEventForm = () => {
     },
   })
   const { toast } = useToast()
+  const queryClient = useQueryClient()
 
   const { mutateAsync } = useMutation({
-    mutationKey: ['createEvent'],
+    mutationKey: ['events'],
     mutationFn: (data: z.infer<typeof EventSchema>) => createEvent(data),
     onSuccess: () => {
-      toast({
-        title: 'Event Created',
-        description: 'Your event has been created successfully!',
+      queryClient.invalidateQueries({ queryKey: ['events'] }).then(() => {
+        form.reset() // This will clear the form fields after the event is successfully created
+
+        setIsFormOpen(false) // This will close the form after the event is successfully created
+
+        toast({
+          title: 'Event Created',
+          description: 'Your event has been created successfully!',
+        })
       })
     },
     onError: (error) => {

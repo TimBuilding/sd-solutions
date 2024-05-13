@@ -14,7 +14,7 @@ const CreateNewEventButton = () => {
       >
         Create New Event
       </button>
-      {isFormOpen && <NewEventForm />}
+      {isFormOpen && <NewEventForm setIsFormOpen={setIsFormOpen} />}
     </div>
   )
 }
