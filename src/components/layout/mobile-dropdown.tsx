@@ -10,6 +10,7 @@ import MobileItemsDropdown, {
 } from '@/components/layout/mobile-items-dropdown'
 import { useUser } from '@/providers/UserProvider'
 import Avatar, { genConfig } from 'react-nice-avatar'
+import useLogout from '@/hooks/useLogout'
 
 const MobileItems: MobileProps[] = [
   {
@@ -27,11 +28,6 @@ const MobileItems: MobileProps[] = [
     icon: Calendar,
     iconClassName: 'h-4 w-4 text-[#999999]',
   },
-  {
-    title: 'Logout',
-    icon: LogOut,
-    iconClassName: 'h-4 w-4 text-[#999999]',
-  },
 ]
 
 const MobileDropdown = () => {
@@ -39,6 +35,7 @@ const MobileDropdown = () => {
   const user = useUser()
 
   const config = genConfig(user?.user_id ?? '')
+  const { mutateAsync: logout, isPending: isLoggingOut } = useLogout()
 
   return (
     <div className="lg:hidden">
@@ -80,6 +77,13 @@ const MobileDropdown = () => {
               iconClassName={item.iconClassName}
             />
           ))}
+          <MobileItemsDropdown
+            title="Logout"
+            icon={LogOut}
+            iconClassName="h-4 w-4 text-[#999999]"
+            onClick={logout as any}
+            disabled={isLoggingOut}
+          />
         </div>
       )}
     </div>
