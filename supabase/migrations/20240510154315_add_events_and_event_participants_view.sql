@@ -5,7 +5,8 @@ select
   'event' as type,
   up.first_name,
   up.last_name,
-  up.email
+  up.email,
+  up.user_id
 from
   events e
   join event_participants ep on e.id = ep.event_id
@@ -17,7 +18,8 @@ select
   'participant' as type,
   up.first_name,
   up.last_name,
-  up.email
+  up.email,
+  up.user_id
 from
   event_participants ep
   join events e on ep.event_id = e.id

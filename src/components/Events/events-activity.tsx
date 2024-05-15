@@ -11,10 +11,10 @@ import { Tables } from '@/types/database.types'
 const ActivityItem: FC<{
   activity: Tables<'events_with_participants'>
 }> = ({ activity }) => {
-  const config1 = genConfig(activity.email || '')
+  const config = genConfig(activity.user_id || '')
   return (
     <div className={'flex flex-row items-start justify-start gap-2.5 py-2.5'}>
-      <Avatar className={'h-8 w-8 flex-shrink-0 rounded-full'} {...config1} />
+      <Avatar className={'h-8 w-8 flex-shrink-0 rounded-full'} {...config} />
       <div>
         <p className={'text-sm leading-5'}>
           {activity.type === 'event' ? (

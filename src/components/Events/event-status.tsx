@@ -1,17 +1,13 @@
 import {
   countParticipants,
   formatParticipants,
-  getParticipantEmails,
+  getParticipantIds,
 } from '@/app/(home)/events/format-participants'
-import { Button } from '@/components/ui/button'
-import createEventParticipant from '@/queries/create-event-participant'
 import getEventParticipants from '@/queries/get-event-participants'
 import { Tables } from '@/types/database.types'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { Hand } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
 import { FC } from 'react'
 import Avatar, { genConfig } from 'react-nice-avatar'
-import { useToast } from '../ui/use-toast'
 import ParticipateButton from './participate-button'
 
 interface Props {
@@ -29,13 +25,13 @@ const EventStatus: FC<Props> = ({ event }) => {
       <div className={'flex w-fit flex-row items-center justify-center'}>
         {data &&
           data.length > 0 &&
-          getParticipantEmails(data).map((email, index) => (
+          getParticipantIds(data).map((userId, index) => (
             <Avatar
               key={index}
               className={`z-${index * 10} h-10 w-10 ${
                 index > 0 ? `-translate-x-${3 * index}` : ''
               } rounded-full border-4 border-card`}
-              {...genConfig(email)}
+              {...genConfig(userId)}
             />
           ))}
       </div>

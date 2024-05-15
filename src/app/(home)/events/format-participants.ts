@@ -34,8 +34,8 @@ const countParticipants = (participants: Participant[]): number => {
   }
 }
 
-const getParticipantEmails = (participant: Participant[]): string[] => {
-  return participant.slice(0, 3).map((p) => p.user_profiles.email)
+const getParticipantIds = (participants: Participant[]): string[] => {
+  return participants.slice(0, 3).map((p) => p.user_profiles.user_id)
 }
 
-export { formatParticipants, countParticipants, getParticipantEmails }
+export { formatParticipants, countParticipants, getParticipantIds }

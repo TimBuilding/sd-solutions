@@ -25,17 +25,17 @@ const ParticipateButton: FC<Props> = ({ event }) => {
         .invalidateQueries({
           queryKey: ['event_participants_button', event.id],
         })
-        .then(() => {
-          queryClient
-            .invalidateQueries({
-              queryKey: ['event_participants', event.id],
-            })
-            .then(() =>
-              toast({
-                title: 'Participant added',
-                description: 'You are now participating in this event',
-              }),
-            )
+        .then(async () => {
+          await queryClient.invalidateQueries({
+            queryKey: ['events_activity'],
+          })
+          await queryClient.invalidateQueries({
+            queryKey: ['event_participants', event.id],
+          })
+          toast({
+            title: 'Participant added',
+            description: 'You are now participating in this event',
+          })
         })
     },
     onError: () => {

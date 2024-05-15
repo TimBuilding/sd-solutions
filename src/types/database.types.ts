@@ -249,6 +249,7 @@ export type Database = {
           first_name: string | null
           last_name: string | null
           type: string | null
+          user_id: string | null
         }
         Relationships: []
       }
