@@ -3,14 +3,19 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
-import { LogOut } from 'lucide-react'
+import { Loader2, LogOut } from 'lucide-react'
 import { useUser } from '@/providers/UserProvider'
 import Avatar, { genConfig } from 'react-nice-avatar'
+import useLogout from '@/hooks/useLogout'
+import { useRouter } from 'next/navigation'
 
 const DesktopDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
   const user = useUser()
   const config = genConfig(user?.user_id ?? '')
+  const router = useRouter
+
+  const { isPending: isLoggingOut, mutateAsync: logout } = useLogout()
 
   return (
     <div className="hidden lg:block">
@@ -40,12 +45,22 @@ const DesktopDropdown = () => {
           </div>
           <div className="border border-[#E6E6E6]"></div>
           <div className="-ml-3 flex w-fit flex-row items-center justify-between">
-            <Button variant="ghost" className=" hover:bg-transparent">
-              <LogOut className="h-4 w-4 text-[#999999]" />
-              <span className="text-md pl-2 font-medium text-[#999999]">
-                {' '}
-                Logout{' '}
-              </span>
+            <Button
+              variant="ghost"
+              className="hover:bg-transparent"
+              onClick={logout}
+              disabled={isLoggingOut}
+            >
+              {isLoggingOut ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                <>
+                  <LogOut className="h-4 w-4 text-[#999999]" />
+                  <span className="text-md pl-2 font-medium text-[#999999]">
+                    Logout
+                  </span>
+                </>
+              )}
             </Button>
           </div>
         </div>
