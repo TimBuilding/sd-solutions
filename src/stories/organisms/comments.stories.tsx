@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
-import Post from '@/components/Post/Post'
 import Comments from '@/components/comments/comments'
+import PublishComments from '@/components/comments/publish-comments'
 
 const meta: Meta = {
   title: 'Organisms/Comments',
@@ -13,4 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const AnnouncementComments: Story = {
   render: () => <Comments />,
+}
+export const PostComments: Story = {
+  render: () => <PublishComments />,
 }
