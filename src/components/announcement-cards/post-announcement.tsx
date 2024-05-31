@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import AnnouncementContent from '@/components/announcement-cards/announcement-content'
 
 const PostAnnouncement = () => {
@@ -8,7 +8,7 @@ const PostAnnouncement = () => {
       <div>
         <span className="px-6 text-xl font-bold text-[#393a4f] ">
           {' '}
-          New Announcement!{' '}
+          New Announcement!
         </span>
         <div className="my-3 h-72 w-[438px] rounded-3xl bg-secondary md:w-[448px] lg:w-[530px]"></div>
       </div>

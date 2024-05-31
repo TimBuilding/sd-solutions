@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -16,6 +16,9 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import AnnouncementSchema from '@/components/announcement-cards/publish-announcement-schema'
 import { Textarea } from '@/components/ui/textarea'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import createAnnouncement from '@/components/announcement-cards/create-announcement'
+import { toast } from '@/components/ui/use-toast'
 
 export function AnnouncementForm() {
   const form = useForm<z.infer<typeof AnnouncementSchema>>({
@@ -26,8 +29,38 @@ export function AnnouncementForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof AnnouncementSchema>) {
-    console.log(values)
+  const queryClient = useQueryClient()
+
+  const { mutateAsync } = useMutation({
+    mutationKey: ['announcements'],
+    mutationFn: (data: z.infer<typeof AnnouncementSchema>) =>
+      createAnnouncement(data),
+    onSuccess: () => {
+      queryClient
+        .invalidateQueries({ queryKey: ['announcements'] })
+        .then(() => {
+          form.reset()
+
+          toast({
+            title: 'Announcement Created',
+            description: 'Your announcement has been created successfully!',
+          })
+        })
+    },
+
+    onError: (error) => {
+      toast({
+        variant: 'destructive',
+        title: 'Something went wrong',
+        description: error.message,
+      })
+    },
+  })
+
+  const onSubmit: SubmitHandler<z.infer<typeof AnnouncementSchema>> = async (
+    data,
+  ) => {
+    await mutateAsync(data)
   }
 
   return (
