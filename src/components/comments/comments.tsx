@@ -7,6 +7,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from '@/components/ui/use-toast'
 import { Tables } from '@/types/database.types'
 import createAnnouncementsComments from '@/queries/create-announcements-comments'
+import PublishComments from '@/components/comments/publish-comments'
+import CommentsList from '@/app/(home)/announcements/comments-list'
 
 interface CommentsProps {
   announcements: Tables<'announcements'>
@@ -71,6 +73,7 @@ const Comments: FC<CommentsProps> = ({ announcements }) => {
           </div>
         </CardContent>
       </Card>
+      <CommentsList announcementId={announcements.id} initialData={[]} />
     </div>
   )
 }

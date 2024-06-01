@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { FC } from 'react'
 import PublishCommentsContent from '@/components/comments/publish-comments-content'
+import { createBrowserClient } from '@/utils/supabase'
+import { useQuery } from '@tanstack/react-query'
+import getAnnouncementComments from '@/queries/get-announcement-comments'
+import { Tables } from '@/types/database.types'
 
-const PublishComments = () => {
+interface PublishCommentsProps {
+  comments: Tables<'announcement_comments'>
+}
+
+const PublishComments: FC<PublishCommentsProps> = ({ comments }) => {
   return (
-    <div className="mx-auto flex w-[506px] flex-col">
-      <span>Comments</span>
+    <div className="mx-auto flex w-full flex-col pt-4">
       <div>
-        <PublishCommentsContent />
+        <PublishCommentsContent content={comments.content} />
       </div>
     </div>
   )
