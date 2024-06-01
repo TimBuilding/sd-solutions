@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import CommentsContent from '@/components/comments/comments-content'
 import { Separator } from '@/components/ui/separator'
@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 
 const Comments = () => {
   return (
-    <div>
+    <div className="py-4">
       <Card className="w-full border border-slate-200 drop-shadow-sm">
         <CardContent className="p-3 pt-4  ">
           <CommentsContent />

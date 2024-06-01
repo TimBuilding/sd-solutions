@@ -14,9 +14,9 @@ const Page = () => {
   return (
     <div className="mx-auto flex flex-col gap-7 px-4">
       <PublishAnnouncement />
-      <PostAnnouncement />
-      <Comments />
-      <PublishComments />
+      {/*<PostAnnouncement />*/}
+      {/*<Comments />*/}
+      {/*<PublishComments />*/}
       <AnnouncementList />
     </div>
   )

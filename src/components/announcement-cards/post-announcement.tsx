@@ -1,6 +1,7 @@
 'use client'
 import React, { FC } from 'react'
 import AnnouncementContent from '@/components/announcement-cards/announcement-content'
+import Comments from '@/components/comments/comments'
 
 interface PostAnnouncementProps {
   title: string

@@ -3,12 +3,15 @@ import React, { FC } from 'react'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import { Button } from '@/components/ui/button'
 import { Heart, MessageCircle } from 'lucide-react'
+import Comments from '@/components/comments/comments'
+import { useState } from 'react'
 
 interface AnnouncementContentProps {
   content: string
 }
 
 const AnnouncementContent: FC<AnnouncementContentProps> = ({ content }) => {
+  const [isOpen, setIsOpen] = useState(false)
   const config = genConfig()
   return (
     <div className="flex w-full flex-col">
@@ -27,12 +30,17 @@ const AnnouncementContent: FC<AnnouncementContentProps> = ({ content }) => {
           <Button variant="ghost" className="hover:bg-transparent">
             <Heart className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" className="hover:bg-transparent">
+          <Button
+            onClick={() => setIsOpen(!isOpen)}
+            variant="ghost"
+            className="hover:bg-transparent"
+          >
             <MessageCircle className="h-5 w-5" />
           </Button>
         </div>
       </div>
       <div className="px-4 text-left text-sm text-[#342558]">{content}</div>
+      {isOpen && <Comments />}
     </div>
   )
 }
