@@ -5,12 +5,17 @@ import { Button } from '@/components/ui/button'
 import { Heart, MessageCircle } from 'lucide-react'
 import Comments from '@/components/comments/comments'
 import { useState } from 'react'
+import { Tables } from '@/types/database.types'
 
 interface AnnouncementContentProps {
   content: string
+  announcement: Tables<'announcements'>
 }
 
-const AnnouncementContent: FC<AnnouncementContentProps> = ({ content }) => {
+const AnnouncementContent: FC<AnnouncementContentProps> = ({
+  content,
+  announcement,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const config = genConfig()
   return (
@@ -40,7 +45,7 @@ const AnnouncementContent: FC<AnnouncementContentProps> = ({ content }) => {
         </div>
       </div>
       <div className="px-4 text-left text-sm text-[#342558]">{content}</div>
-      {isOpen && <Comments />}
+      {isOpen && <Comments announcements={announcement} />}
     </div>
   )
 }

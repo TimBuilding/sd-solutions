@@ -22,11 +22,7 @@ const AnnouncementList = () => {
     <>
       {data &&
         data.map((announcement) => (
-          <PostAnnouncement
-            key={announcement.id}
-            title={announcement.title}
-            content={announcement.content}
-          />
+          <PostAnnouncement key={announcement.id} announcement={announcement} />
         ))}
     </>
   )
