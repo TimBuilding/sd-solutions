@@ -11,9 +11,9 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const AnnouncementComments: Story = {
-  render: () => <Comments />,
-}
+// export const AnnouncementComments: Story = {
+//   render: () => <Comments announcements={announcement} />,
+// }
 export const PostComments: Story = {
   render: () => <PublishComments />,
 }
