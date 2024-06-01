@@ -18,15 +18,18 @@ const AnnouncementList = () => {
     queryFn: () => getAnnouncements(supabase),
   })
 
-  console.log(data)
-
-  return <></>
-
-  // return (
-  //   <>
-  //     {data && data.map((announcement) => <PostAnnouncement key={announcement.id}/>)}
-  //   </>
-  // )
+  return (
+    <>
+      {data &&
+        data.map((announcement) => (
+          <PostAnnouncement
+            key={announcement.id}
+            title={announcement.title}
+            content={announcement.content}
+          />
+        ))}
+    </>
+  )
 }
 
 export default AnnouncementList
