@@ -34,6 +34,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcement_comments: {
+        Row: {
+          announcement_id: string
+          content: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          announcement_id: string
+          content: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          announcement_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'announcement_comments_announcement_id_fkey'
+            columns: ['announcement_id']
+            isOneToOne: false
+            referencedRelation: 'announcements'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'announcement_comments_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
+          },
+        ]
+      }
       announcements: {
         Row: {
           content: string
