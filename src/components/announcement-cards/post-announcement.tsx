@@ -4,8 +4,16 @@ import AnnouncementContent from '@/components/announcement-cards/announcement-co
 import Comments from '@/components/comments/comments'
 import { Tables } from '@/types/database.types'
 
+export type ExtendedAnnouncement = Tables<'announcements'> & {
+  user_profiles: {
+    user_id: string
+    first_name: string
+    last_name: string
+  }
+}
+
 interface PostAnnouncementProps {
-  announcement: Tables<'announcements'>
+  announcement: ExtendedAnnouncement
 }
 
 const PostAnnouncement: FC<PostAnnouncementProps> = ({ announcement }) => {

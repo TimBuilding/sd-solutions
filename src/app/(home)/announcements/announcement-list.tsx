@@ -4,13 +4,15 @@ import { Tables } from '@/types/database.types'
 import { createBrowserClient } from '@/utils/supabase'
 import { useQuery } from '@tanstack/react-query'
 import getAnnouncements from '@/queries/get-announcements'
-import PostAnnouncement from '@/components/announcement-cards/post-announcement'
+import PostAnnouncement, {
+  ExtendedAnnouncement,
+} from '@/components/announcement-cards/post-announcement'
 
-// interface Props {
-//   initialData: Tables<'announcements'>[]
-// }
+interface Props {
+  initialData: ExtendedAnnouncement[]
+}
 
-const AnnouncementList = () => {
+const AnnouncementList: FC<Props> = ({ initialData }) => {
   const supabase = createBrowserClient()
 
   const { data, isPending } = useQuery({

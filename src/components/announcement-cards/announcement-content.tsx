@@ -1,15 +1,16 @@
 'use client'
 import React, { FC } from 'react'
-import Avatar, { genConfig } from 'react-nice-avatar'
 import { Button } from '@/components/ui/button'
 import { Heart, MessageCircle } from 'lucide-react'
 import Comments from '@/components/comments/comments'
 import { useState } from 'react'
-import { Tables } from '@/types/database.types'
+import UserProfile from '@/components/announcement-cards/user-profile'
+import { ExtendedAnnouncement } from '@/components/announcement-cards/post-announcement'
+import { format } from 'date-fns'
 
 interface AnnouncementContentProps {
   content: string
-  announcement: Tables<'announcements'>
+  announcement: ExtendedAnnouncement
 }
 
 const AnnouncementContent: FC<AnnouncementContentProps> = ({
@@ -17,20 +18,20 @@ const AnnouncementContent: FC<AnnouncementContentProps> = ({
   announcement,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const config = genConfig()
+
+  const date = announcement.created_at
+    ? format(new Date(announcement.created_at), 'MMMM dd hh:mmaaa')
+    : ''
+
   return (
     <div className="flex w-full flex-col">
       <div className="flex flex-row justify-between px-4 py-4">
-        <div className="flex flex-row items-center justify-start">
-          <Avatar className="h-11 w-11 rounded-full" {...config} />
-          <div className="flex flex-col px-2">
-            <span className="text-sm font-bold text-[#393a4f]"> Jane Doe </span>
-            <span className="text-sm font-normal text-[#999999]">
-              {' '}
-              2 hours ago
-            </span>
-          </div>
-        </div>
+        <UserProfile
+          announcement={announcement}
+          first_name={announcement.user_profiles.first_name || ''}
+          last_name={announcement.user_profiles.last_name || ''}
+          date={date}
+        />
         <div className="flex flex-row justify-end">
           <Button variant="ghost" className="hover:bg-transparent">
             <Heart className="h-5 w-5" />
