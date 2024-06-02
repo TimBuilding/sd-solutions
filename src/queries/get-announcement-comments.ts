@@ -13,7 +13,7 @@ const getAnnouncementComments = async (
 
   const { data, error } = await supabase
     .from('announcement_comments')
-    .select('*, user_profiles(first_name, user_id, email)')
+    .select('*, user_profiles(first_name, last_name, user_id, email)')
     .eq('announcement_id', announcementId)
 
   if (error) {

@@ -1,7 +1,6 @@
-import { SupabaseClient } from '@supabase/supabase-js'
 import { z } from 'zod'
 import { createBrowserClient } from '@/utils/supabase'
-import { Tables } from '@/types/database.types'
+import { Tables, TablesInsert } from '@/types/database.types'
 import CommentsSchema from '@/components/comments/comments-schema'
 
 const createAnnouncementsComments = async (
@@ -15,10 +14,10 @@ const createAnnouncementsComments = async (
   } = await supabase.auth.getUser()
 
   if (!user) {
-    throw new Error('You must be an admin to create an announcement') // Throw an error if the user is not logged in
+    throw new Error('You must be logged in to create a comment') // Throw an error if the user is not logged in
   }
 
-  const insertAnnouncementComments: Tables<'announcement_comments'> = {
+  const insertAnnouncementComments: TablesInsert<'announcement_comments'> = {
     content,
     user_id: user.id,
     announcement_id: announcementId,

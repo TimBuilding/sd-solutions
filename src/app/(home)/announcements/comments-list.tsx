@@ -8,7 +8,15 @@ import { Tables } from '@/types/database.types'
 
 interface CommentsListProps {
   announcementId: string
-  initialData: Tables<'announcement_comments'>[]
+  initialData: ExtendedAnnouncementComments[]
+}
+
+export type ExtendedAnnouncementComments = Tables<'announcement_comments'> & {
+  user_profiles: {
+    user_id: string
+    first_name: string
+    last_name: string
+  }
 }
 
 const CommentsList: FC<CommentsListProps> = ({
