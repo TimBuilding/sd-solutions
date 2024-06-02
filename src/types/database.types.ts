@@ -105,6 +105,42 @@ export type Database = {
           },
         ]
       }
+      announcements_likes: {
+        Row: {
+          announcement_id: string
+          created_at: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          announcement_id: string
+          created_at?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          announcement_id?: string
+          created_at?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'announcements_likes_announcement_id_fkey'
+            columns: ['announcement_id']
+            isOneToOne: false
+            referencedRelation: 'announcements'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'announcements_likes_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
+          },
+        ]
+      }
       connections: {
         Row: {
           connection_user_id: string

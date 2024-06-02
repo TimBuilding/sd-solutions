@@ -5,7 +5,7 @@ import {
   getLikerUserIds,
   getTotalLikes,
 } from '@/app/(home)/(feed)/format-likers'
-import getNewsfeedLikes from '@/queries/get-newsfeed_likes'
+import getNewsfeedLikes from '@/queries/get-newsfeed-likes'
 import { useQuery } from '@tanstack/react-query'
 import { Heart, Link2, MessageCircle } from 'lucide-react'
 import Avatar, { genConfig } from 'react-nice-avatar'
