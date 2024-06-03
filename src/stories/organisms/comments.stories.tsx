@@ -15,5 +15,5 @@ type Story = StoryObj<typeof meta>
 //   render: () => <Comments announcements={announcement} />,
 // }
 export const PostComments: Story = {
-  render: () => <PublishComments />,
+  render: () => <></>,
 }

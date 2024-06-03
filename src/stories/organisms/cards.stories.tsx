@@ -22,7 +22,7 @@ export const LatestAnnouncements: Story = {
 }
 
 export const AnnouncementPosts: Story = {
-  render: () => <PostAnnouncement />,
+  render: () => <></>,
 }
 
 export const NewAnnouncement: Story = {

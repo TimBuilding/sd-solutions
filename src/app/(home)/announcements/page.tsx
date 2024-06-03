@@ -20,7 +20,7 @@ const Page: FC<Props> = ({ user }) => {
       {/*<PostAnnouncement />*/}
       {/*<Comments />*/}
       {/*<PublishComments />*/}
-      <AnnouncementList initialData={[]}/>
+      <AnnouncementList initialData={[]} />
     </div>
   )
 }
