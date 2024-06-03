@@ -17,16 +17,19 @@ const MobileItems: MobileProps[] = [
     title: 'Feed',
     icon: Activity,
     iconClassName: 'h-4 w-4 text-[#999999]',
+    href: '/',
   },
   {
     title: 'Announcements',
     icon: Megaphone,
     iconClassName: 'h-4 w-4 text-[#999999]',
+    href: '/announcements',
   },
   {
     title: 'Events',
     icon: Calendar,
     iconClassName: 'h-4 w-4 text-[#999999]',
+    href: '/events',
   },
 ]
 
@@ -75,6 +78,7 @@ const MobileDropdown = () => {
               title={item.title}
               icon={item.icon}
               iconClassName={item.iconClassName}
+              href={item.href}
             />
           ))}
           <MobileItemsDropdown
