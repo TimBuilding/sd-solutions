@@ -8,6 +8,7 @@ import MobileDropdown from '@/components/layout/mobile-dropdown'
 import DesktopDropdown from '@/components/layout/desktop-dropdown'
 import SearchBox from '@/components/search/search-box'
 import Link from 'next/link'
+import Notification from '../notification/notification'
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -30,12 +31,10 @@ const Navbar = () => {
                 />
               </Link>
             </Button>
-            <Button variant="ghost" className="group hover:bg-red-500">
+            {/* <Button variant="ghost" className="group hover:bg-red-500">
               <Heart className="h-4 w-4 text-[#999999] group-hover:animate-pulse group-hover:fill-white group-hover:text-white group-hover:delay-0 group-hover:duration-1000" />
-            </Button>
-            <Button variant="ghost" className="group hover:bg-secondary">
-              <Bell className="h-4 w-4 text-[#999999] group-hover:text-white" />
-            </Button>
+            </Button> */}
+            <Notification />
             <Button
               onClick={() => setIsSearchOpen(true)}
               variant="ghost"
