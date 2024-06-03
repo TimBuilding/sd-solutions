@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Loader2, Lock, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import loginAction from '@/app/(auth)/login/login-action'
+import Link from 'next/link'
 
 const LoginForm: FC = () => {
   const [isPending, startTransition] = useTransition()
@@ -63,6 +64,11 @@ const LoginForm: FC = () => {
         <Button type={'submit'} className={'w-full'} disabled={isPending}>
           {isPending ? <Loader2 className={'animate-spin'} /> : 'Login'}
         </Button>
+        <div className="flex flex-col items-center justify-center">
+          <Link href={'/signup'} className="text-sm underline">
+            Don&apos;t have an account?
+          </Link>
+        </div>
       </form>
     </Form>
   )
