@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,9 +10,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
 
 const UserAuthentication = () => {
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const { activeStep, setActiveStep, isLoading } = useSignUpContext()
 
   return (
@@ -30,15 +32,30 @@ const UserAuthentication = () => {
                 Password
               </FormLabel>
               <FormControl>
-                <Input
-                  type={'password'}
-                  placeholder={'Choose a password'}
-                  disabled={isLoading}
-                  className={
-                    'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
-                  }
-                  {...field}
-                />
+                <>
+                  <Input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={'Choose a password'}
+                    disabled={isLoading}
+                    className={
+                      'h-16 pt-6 text-sm placeholder:text-muted-foreground/30'
+                    }
+                    {...field}
+                  />
+                  <Button
+                    className={'absolute right-3 top-3'}
+                    variant={'ghost'}
+                    size={'icon'}
+                    type={'button'}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <Eye className={'h-4 w-4'} />
+                    ) : (
+                      <EyeOff className={'h-4 w-4'} />
+                    )}
+                  </Button>
+                </>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -56,15 +73,30 @@ const UserAuthentication = () => {
                 Repeat Password
               </FormLabel>
               <FormControl>
-                <Input
-                  type={'password'}
-                  placeholder={'Repeat your password'}
-                  disabled={isLoading}
-                  className={
-                    'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
-                  }
-                  {...field}
-                />
+                <>
+                  <Input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder={'Repeat your password'}
+                    disabled={isLoading}
+                    className={
+                      'h-16 pt-6 text-sm  placeholder:text-muted-foreground/30'
+                    }
+                    {...field}
+                  />
+                  <Button
+                    className={'absolute right-3 top-3'}
+                    variant={'ghost'}
+                    size={'icon'}
+                    type={'button'}
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? (
+                      <Eye className={'h-4 w-4'} />
+                    ) : (
+                      <EyeOff className={'h-4 w-4'} />
+                    )}
+                  </Button>
+                </>
               </FormControl>
               <FormMessage />
             </FormItem>
