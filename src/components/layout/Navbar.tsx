@@ -7,6 +7,7 @@ import SDSolutionsLogoMinimal from '@/components/SDSolutionsLogo-Minimal'
 import MobileDropdown from '@/components/layout/mobile-dropdown'
 import DesktopDropdown from '@/components/layout/desktop-dropdown'
 import SearchBox from '@/components/search/search-box'
+import Link from 'next/link'
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -18,13 +19,17 @@ const Navbar = () => {
       ) : (
         <>
           <div className="flex flex-row items-center justify-start gap-2.5">
-            <SDSolutionsLogoMinimal
-              className="h-6 w-6 bg-transparent fill-black"
-              style={{
-                filter:
-                  'invert(17%) sepia(17%) saturate(7489%) hue-rotate(158deg) brightness(92%) contrast(89%)',
-              }}
-            />
+            <Button variant={'ghost'} size={'icon'}>
+              <Link href="/">
+                <SDSolutionsLogoMinimal
+                  className="h-6 w-6 bg-transparent fill-black"
+                  style={{
+                    filter:
+                      'invert(17%) sepia(17%) saturate(7489%) hue-rotate(158deg) brightness(92%) contrast(89%)',
+                  }}
+                />
+              </Link>
+            </Button>
             <Button variant="ghost" className="group hover:bg-red-500">
               <Heart className="h-4 w-4 text-[#999999] group-hover:animate-pulse group-hover:fill-white group-hover:text-white group-hover:delay-0 group-hover:duration-1000" />
             </Button>
