@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import Avatar, { genConfig } from 'react-nice-avatar'
-import PublishCommentsReact from '@/components/comments/publish-comments-react'
+import PublishCommentsLikesCount from '@/components/comments/publish-comments-likes-count'
 import { ExtendedAnnouncementComments } from '@/app/(home)/announcements/comments-list'
 
 interface PublishCommentsContentProps {
@@ -33,7 +33,7 @@ const PublishCommentsContent: FC<PublishCommentsContentProps> = ({
           <span className="text-xs text-[#999999]"> {date}</span>
         </div>
         <span className="text-base text-[#6A6C93]">{content}</span>
-        <PublishCommentsReact />
+        <PublishCommentsLikesCount comments={comments} />
       </div>
     </div>
   )

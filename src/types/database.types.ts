@@ -141,6 +141,48 @@ export type Database = {
           },
         ]
       }
+      comments_likes: {
+        Row: {
+          comment_id: string
+          created_at: string | null
+          dislike: boolean | null
+          id: string
+          likes: boolean | null
+          user_id: string
+        }
+        Insert: {
+          comment_id: string
+          created_at?: string | null
+          dislike?: boolean | null
+          id?: string
+          likes?: boolean | null
+          user_id: string
+        }
+        Update: {
+          comment_id?: string
+          created_at?: string | null
+          dislike?: boolean | null
+          id?: string
+          likes?: boolean | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'comments_likes_comment_id_fkey'
+            columns: ['comment_id']
+            isOneToOne: false
+            referencedRelation: 'announcement_comments'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'comments_likes_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'user_profiles'
+            referencedColumns: ['user_id']
+          },
+        ]
+      }
       connections: {
         Row: {
           connection_user_id: string

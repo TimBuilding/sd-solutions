@@ -35,3 +35,10 @@ create trigger create_user_profile
 create function first_last_name(user_profiles) returns text as $$
   select $1.first_name || ' ' || $1.last_name;
 $$ language sql immutable;
+
+create policy "Allow user to update user_profiles"
+  on user_profiles for update
+  to authenticated
+  using (user_id = auth.uid())
+  with check (user_id = auth.uid());
+
