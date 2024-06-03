@@ -41,7 +41,7 @@ const MobileDropdown = () => {
   const { mutateAsync: logout, isPending: isLoggingOut } = useLogout()
 
   return (
-    <div className="lg:hidden">
+    <div className="z-50 lg:hidden">
       <Button
         variant="ghost"
         className="hover:bg-transparent"

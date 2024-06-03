@@ -14,7 +14,7 @@ const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   return (
-    <div className="sticky top-0 z-30 flex w-full flex-row  justify-between bg-white px-3 py-2 drop-shadow-md">
+    <div className="sticky top-0 z-10 flex w-full flex-row  justify-between bg-white px-3 py-2 drop-shadow-md">
       {isSearchOpen ? (
         <SearchBox setIsSearchOpen={setIsSearchOpen} />
       ) : (
