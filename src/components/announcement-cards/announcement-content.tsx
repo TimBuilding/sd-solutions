@@ -10,6 +10,7 @@ import { format } from 'date-fns'
 import PublishAnnouncementReact from '@/components/announcement-cards/publish-announcement-react'
 import { useQuery } from '@tanstack/react-query'
 import getAnnouncementLikes from '@/queries/get-announcement-likes'
+import { Separator } from '@/components/ui/separator'
 
 interface AnnouncementContentProps {
   content: string
@@ -32,6 +33,10 @@ const AnnouncementContent: FC<AnnouncementContentProps> = ({
 
   return (
     <div className="flex w-full flex-col">
+      <span className="pl-4 text-left text-2xl font-bold text-[#393a4f] ">
+        {announcement.title}
+      </span>
+      <div className="text-md px-4 text-left text-[#342558]">{content}</div>
       <div className="flex flex-row justify-between px-4 py-4">
         <UserProfile
           announcement={announcement}
@@ -54,8 +59,8 @@ const AnnouncementContent: FC<AnnouncementContentProps> = ({
           </Button>
         </div>
       </div>
-      <div className="px-4 text-left text-sm text-[#342558]">{content}</div>
       {isOpen && <Comments announcements={announcement} />}
+      <Separator className="m-6" />
     </div>
   )
 }
