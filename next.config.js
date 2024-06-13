@@ -3,6 +3,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    remotePatterns: [{ hostname: '127.0.0.1' }],
+  },
+}
 
 module.exports = withBundleAnalyzer(nextConfig)
