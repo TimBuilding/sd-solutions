@@ -3,11 +3,19 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
-import { Loader2, LogOut } from 'lucide-react'
+import { Bolt, Loader2, LogOut } from 'lucide-react'
 import { useUser } from '@/providers/UserProvider'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import useLogout from '@/hooks/useLogout'
 import { useRouter } from 'next/navigation'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import UserProfileForm from '@/components/layout/user-profile-form'
 
 const DesktopDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,24 +52,53 @@ const DesktopDropdown = () => {
             </div>
           </div>
           <div className="border border-[#E6E6E6]"></div>
-          <div className="-ml-3 flex w-fit flex-row items-center justify-between">
-            <Button
-              variant="ghost"
-              className="hover:bg-transparent"
-              onClick={logout}
-              disabled={isLoggingOut}
-            >
-              {isLoggingOut ? (
-                <Loader2 className="animate-spin" />
-              ) : (
-                <>
-                  <LogOut className="h-4 w-4 text-[#999999]" />
-                  <span className="text-md pl-2 font-medium text-[#999999]">
-                    Logout
-                  </span>
-                </>
-              )}
-            </Button>
+          <div className="flex flex-col">
+            <div className="-ml-3 flex w-fit flex-row items-center justify-between">
+              <Dialog>
+                <DialogTrigger>
+                  <Button
+                    variant="ghost"
+                    className="w-full hover:bg-transparent"
+                  >
+                    <div className="mr-auto flex w-fit flex-row items-center justify-center">
+                      <Bolt className="h-4 w-4 text-[#999999]" />
+                      <span className="text-md pl-2 font-medium text-[#999999]">
+                        {' '}
+                        Settings
+                      </span>
+                    </div>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="w-full rounded-lg">
+                  <DialogHeader>
+                    <DialogTitle className="text-left">
+                      {' '}
+                      Edit Profile
+                    </DialogTitle>
+                  </DialogHeader>
+                  <UserProfileForm />
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="-ml-3 -mt-1 flex w-fit flex-row items-center justify-between">
+              <Button
+                variant="ghost"
+                className="hover:bg-transparent"
+                onClick={logout}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  <>
+                    <LogOut className="h-4 w-4 text-[#999999]" />
+                    <span className="text-md pl-2 font-medium text-[#999999]">
+                      Logout
+                    </span>
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       )}
