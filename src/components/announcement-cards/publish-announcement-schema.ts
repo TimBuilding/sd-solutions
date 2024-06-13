@@ -12,6 +12,7 @@ const AnnouncementSchema = z.object({
     .string()
     .min(1, { message: 'Announcement content is required' })
     .max(1000, { message: 'Event content must be less than 1000 charcters' }),
+  imageFile: z.instanceof(File).optional(),
 })
 
 export default AnnouncementSchema

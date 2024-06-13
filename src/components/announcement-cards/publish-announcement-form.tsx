@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -30,6 +30,7 @@ export function AnnouncementForm() {
   })
 
   const queryClient = useQueryClient()
+  const [photo, setPhoto] = useState(null)
 
   const { mutateAsync } = useMutation({
     mutationKey: ['announcements'],
@@ -60,12 +61,36 @@ export function AnnouncementForm() {
   const onSubmit: SubmitHandler<z.infer<typeof AnnouncementSchema>> = async (
     data,
   ) => {
+    console.log(data)
     await mutateAsync(data)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
+          control={form.control}
+          name="imageFile"
+          render={({ field: { value, onChange, ...fieldProps } }) => (
+            <FormItem className="flex flex-row items-center gap-9">
+              <FormLabel className="text-right text-sm">Picture</FormLabel>
+              <div className="flex w-full flex-col justify-between">
+                <FormControl>
+                  <Input
+                    {...fieldProps}
+                    placeholder="Picture"
+                    type="file"
+                    accept="image/*, application/pdf"
+                    onChange={(event) =>
+                      onChange(event.target.files && event.target.files[0])
+                    }
+                  />
+                </FormControl>
+                <FormMessage className="mt-2" />
+              </div>
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="title"
