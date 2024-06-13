@@ -51,9 +51,9 @@ const DesktopDropdown = () => {
                 {' '}
                 {user?.first_name} {user?.last_name}{' '}
               </span>
-              <span className="text-xs font-normal text-[#999999]">
+              <span className="text-xs font-normal capitalize text-[#999999]">
                 {' '}
-                Human Resources
+                {user?.role}
               </span>
             </div>
           </div>
