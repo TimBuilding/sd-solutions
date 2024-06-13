@@ -57,22 +57,6 @@ const PostStatus = () => {
           <Heart className={'h-4 w-4'} />
           <span>{data ? getTotalLikes(data) : 0}</span>
         </div>
-        <div
-          className={
-            'flex flex-row items-center justify-center gap-1 text-muted-foreground/50'
-          }
-        >
-          <Link2 className={'h-4 w-4'} />
-          <span>0</span>
-        </div>
-        <div
-          className={
-            'flex flex-row items-center justify-center gap-1 text-muted-foreground/50'
-          }
-        >
-          <MessageCircle className={'h-4 w-4'} />
-          <span>0</span>
-        </div>
       </div>
     </div>
   )
