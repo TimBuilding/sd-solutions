@@ -54,6 +54,8 @@ const EventsActivity = () => {
     queryFn: () => getEventActivities(supabase),
   })
 
+  console.log(data)
+
   return (
     <div
       className={

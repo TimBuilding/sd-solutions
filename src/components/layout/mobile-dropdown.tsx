@@ -3,7 +3,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Megaphone, Calendar, LogOut } from 'lucide-react'
+import { Megaphone, Calendar, LogOut, Bolt } from 'lucide-react'
 import { Activity } from 'lucide-react'
 import MobileItemsDropdown, {
   MobileProps,
@@ -17,19 +17,22 @@ const MobileItems: MobileProps[] = [
     title: 'Feed',
     icon: Activity,
     iconClassName: 'h-4 w-4 text-[#999999]',
-    href: '/',
   },
   {
     title: 'Announcements',
     icon: Megaphone,
     iconClassName: 'h-4 w-4 text-[#999999]',
-    href: '/announcements',
   },
   {
     title: 'Events',
     icon: Calendar,
     iconClassName: 'h-4 w-4 text-[#999999]',
-    href: '/events',
+  },
+  {
+    title: 'Settings',
+    icon: Bolt,
+    iconClassName: 'h-4 w-4 text-[#999999]',
+    isModal: true,
   },
 ]
 
@@ -78,7 +81,7 @@ const MobileDropdown = () => {
               title={item.title}
               icon={item.icon}
               iconClassName={item.iconClassName}
-              href={item.href}
+              isModal={item.isModal}
             />
           ))}
           <MobileItemsDropdown
