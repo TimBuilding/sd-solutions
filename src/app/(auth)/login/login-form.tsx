@@ -1,17 +1,18 @@
 'use client'
-import React, { FC, useTransition } from 'react'
+import React, { FC, useState, useTransition } from 'react'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import LoginSchema from '@/app/(auth)/login/login-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/input'
-import { Loader2, Lock, User } from 'lucide-react'
+import { Eye, EyeOff, Loader2, Lock, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import loginAction from '@/app/(auth)/login/login-action'
 import Link from 'next/link'
 
 const LoginForm: FC = () => {
+  const [showPassword, setShowPassword] = useState(false)
   const [isPending, startTransition] = useTransition()
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -48,15 +49,30 @@ const LoginForm: FC = () => {
           control={form.control}
           name={'password'}
           render={({ field }) => (
-            <FormItem>
+            <FormItem className={'relative'}>
               <FormControl>
-                <Input
-                  icon={<Lock />}
-                  type={'password'}
-                  placeholder={'mysecretpassword'}
-                  disabled={isPending}
-                  {...field}
-                />
+                <>
+                  <Input
+                    icon={<Lock />}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={'mysecretpassword'}
+                    disabled={isPending}
+                    {...field}
+                  />
+                  <Button
+                    className={'absolute -top-2 right-1'}
+                    variant={'ghost'}
+                    size={'icon'}
+                    type={'button'}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <Eye className={'h-4 w-4'} />
+                    ) : (
+                      <EyeOff className={'h-4 w-4'} />
+                    )}
+                  </Button>
+                </>
               </FormControl>
             </FormItem>
           )}
