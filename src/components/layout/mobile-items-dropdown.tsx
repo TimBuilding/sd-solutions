@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import UserProfileForm from '@/components/layout/user-profile-form'
 
 interface IconProps {
   className?: string
@@ -67,16 +68,7 @@ const MobileItemsDropdown: FC<MobileProps> = ({
             <DialogHeader>
               <DialogTitle className="text-left"> Edit Profile</DialogTitle>
             </DialogHeader>
-            <div className="flex w-full flex-col gap-2">
-              <div className="flex flex-row items-center gap-7">
-                <Label>First Name</Label>
-                <Input />
-              </div>
-              <div className="flex w-full flex-row items-center gap-7">
-                <Label>Last Name</Label>
-                <Input />
-              </div>
-            </div>
+            <UserProfileForm />
           </DialogContent>
         </Dialog>
       ) : (
