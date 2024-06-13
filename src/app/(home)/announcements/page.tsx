@@ -1,22 +1,29 @@
-'use client'
+'use server'
 
 import React, { FC } from 'react'
-import PostAnnouncement from '@/components/announcement-cards/post-announcement'
-import Comments from '@/components/comments/comments'
-import PublishComments from '@/components/comments/publish-comments'
 import AnnouncementList from '@/app/(home)/announcements/announcement-list'
 import PublishAnnouncement from '@/components/announcement-cards/publish-announcement'
-import getUserProfile from '@/queries/get-user-profile'
-import { Tables } from '@/types/database.types'
+import { createServerClient } from '@/utils/supabase'
+import { cookies } from 'next/headers'
 
-interface Props {
-  user: Tables<'user_profiles'>
-}
+const Page = async () => {
+  const supabase = createServerClient(cookies())
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-const Page: FC<Props> = ({ user }) => {
+  // get user profile
+  const { data: userProfile, error: userProfileError } = await supabase
+    .from('user_profiles')
+    .select('*')
+    .eq('user_id', user?.id)
+    .eq('role', 'admin')
+    .maybeSingle()
+
+  console.log(userProfile)
   return (
     <div className="mx-auto flex flex-col gap-7 px-4">
-      <PublishAnnouncement />
+      {(userProfile || userProfileError) && <PublishAnnouncement />}
       {/*<PostAnnouncement />*/}
       {/*<Comments />*/}
       {/*<PublishComments />*/}
