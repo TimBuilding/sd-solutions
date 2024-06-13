@@ -38,13 +38,19 @@ const DesktopDropdown = () => {
       {isOpen && (
         <div className="absolute right-0 z-0 mr-4 flex w-48 flex-col gap-2 rounded-md bg-white px-4 py-4 drop-shadow-md">
           <div className="items-center justify-between">
-            <span className="text-xs font-semibold"> JANE DOE </span>
+            <span className="text-xs font-semibold uppercase ">
+              {' '}
+              {user?.first_name} {user?.last_name}
+            </span>
           </div>
           <div className="mx-0 w-full border border-[#E6E6E6]"></div>
           <div className="flex flex-row items-center gap-3.5">
             <Avatar {...config} className="h-6 w-6 rounded-full" />
             <div className="flex flex-col">
-              <span className="text-sm font-medium"> Jane Doe </span>
+              <span className="text-sm font-medium capitalize">
+                {' '}
+                {user?.first_name} {user?.last_name}{' '}
+              </span>
               <span className="text-xs font-normal text-[#999999]">
                 {' '}
                 Human Resources

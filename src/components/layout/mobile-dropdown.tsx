@@ -72,7 +72,10 @@ const MobileDropdown = () => {
         <div className="absolute left-0 right-0 z-0 mt-2 flex w-full flex-col gap-2 bg-white px-4 py-2 drop-shadow-md ">
           <div className="flex flex-row items-center gap-1.5">
             <Avatar {...config} className="h-6 w-6 rounded-full" />
-            <span className="text-xs font-normal"> JANE DOE </span>
+            <span className="text-xs font-medium uppercase">
+              {' '}
+              {user?.first_name} {user?.last_name}{' '}
+            </span>
           </div>
           <div className="border border-[#E6E6E6]"></div>
           {MobileItems.map((item, index) => (
