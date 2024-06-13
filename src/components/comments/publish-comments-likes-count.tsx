@@ -26,7 +26,7 @@ const PublishCommentsLikesCount: FC<PublishCommentsLikesCountProps> = ({
 
   return (
     <div className="flex min-w-full flex-row items-center justify-between pt-4">
-      <div className="flex flex-row justify-start  gap-4">
+      <div className="flex flex-row justify-start gap-4">
         <ThumbsUp className="h-5 w-5 text-[#999999]" />
         <span className="text-sm font-semibold text-[#999999]"> {likes}</span>
         <ThumbsDown className="h-5 w-5 text-[#999999]" />

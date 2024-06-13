@@ -36,7 +36,7 @@ const PublishCommentsReact: FC<PublishCommentsReactProps> = ({ comments }) => {
   })
 
   return (
-    <div className="flex flex-row gap-2 ">
+    <div className="flex translate-x-2 translate-x-6 flex-row gap-2">
       <div className="group h-8 w-8 rounded-full border border-[#999999] hover:border-[#1ce589]">
         <Button
           variant="ghost"
