@@ -11,22 +11,26 @@ import MobileItemsDropdown, {
 import { useUser } from '@/providers/UserProvider'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import useLogout from '@/hooks/useLogout'
+import { useRouter } from 'next/navigation'
 
 const MobileItems: MobileProps[] = [
   {
     title: 'Feed',
     icon: Activity,
     iconClassName: 'h-4 w-4 text-[#999999]',
+    path: '/',
   },
   {
     title: 'Announcements',
     icon: Megaphone,
     iconClassName: 'h-4 w-4 text-[#999999]',
+    path: '/announcements',
   },
   {
     title: 'Events',
     icon: Calendar,
     iconClassName: 'h-4 w-4 text-[#999999]',
+    path: '/events',
   },
   {
     title: 'Settings',
@@ -42,6 +46,13 @@ const MobileDropdown = () => {
 
   const config = genConfig(user?.user_id ?? '')
   const { mutateAsync: logout, isPending: isLoggingOut } = useLogout()
+
+  const router = useRouter()
+  const handleItemClick = (path: string | undefined) => {
+    if (path) {
+      router.push(path)
+    }
+  }
 
   return (
     <div className="z-50 lg:hidden">
@@ -85,6 +96,7 @@ const MobileDropdown = () => {
               icon={item.icon}
               iconClassName={item.iconClassName}
               isModal={item.isModal}
+              onClick={() => handleItemClick(item.path)}
             />
           ))}
           <MobileItemsDropdown

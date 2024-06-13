@@ -22,6 +22,7 @@ export interface MobileProps {
   disabled?: boolean
   onClick?: () => void
   isModal?: boolean
+  path?: string
 }
 
 const MobileItemsDropdown: FC<MobileProps> = ({
