@@ -5,7 +5,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [{ hostname: '127.0.0.1' }],
+    remotePatterns: [
+      {
+        hostname: 'pfodcansnwmjzknylpqu.supabase.co',
+        protocol: 'https',
+        pathname: '/storage/v1/object/public/announcements/**',
+      },
+      { hostname: '127.0.0.1' },
+    ],
   },
 }
 
