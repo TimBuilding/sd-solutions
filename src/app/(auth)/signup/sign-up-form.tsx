@@ -104,7 +104,7 @@ const SignUpForm = () => {
           className={'mx-auto w-full max-w-xs pt-7 md:max-w-lg'}
         >
           <Stepper activeStep={activeStep} />
-          <div className={'mt-64'}>
+          <div className={'mt-48 min-h-full items-center justify-between'}>
             <div className={'flex flex-col items-center justify-center gap-5'}>
               <h2 className={'text-xl text-foreground'}>
                 {steps[activeStep].label}
